@@ -1,16 +1,18 @@
 import React, {useState, useEffect} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import ReactFlow from 'reactflow'
+import GraphDB from "../db/db_loader";
+
+import 'reactflow/dist/style.css';
+ 
+const initialNodes = [
+  { id: '1', position: { x: 0, y: 0 }, data: { label: '1' } },
+  { id: '2', position: { x: 0, y: 100 }, data: { label: '2' } },
+];
+const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
 
 function App() {
-  const [currentTime, setCurrentTime] = useState(0);
-
-  useEffect(() => {
-    fetch('/time').then(res => res.json()).then(data => {
-      setCurrentTime(data.time);
-    });
-  }, []);
-
   return (
     <div className="App">
       <header className="App-header">
@@ -26,9 +28,13 @@ function App() {
         >
           Learn React
         </a>
-        <p>The current time is {currentTime}.</p>
+        <p style={{ width: '100vw', height: '100vh' }}>
+        <ReactFlow nodes={initialNodes} edges={initialEdges} />
+      </p>
+      <p>{GraphDB()}</p>
       </header>
     </div>
+
   );
 }
 
