@@ -24,11 +24,19 @@ export type BJJPosition = {
     name: string,
     aliases : [string?],
     description : string,
-    from : [BJJPosition?],
-    to : [BJJPosition?],
     type : BJJPositionType,
     valid_in_sports : [Sports?], 
     reference : [Reference?],
     diagram : HTMLImageElement | string | File | null,
-    comments : string
+    comments : string | null
+}
+
+export type BJJTransition = {
+    name : string | null, 
+    from : BJJPosition, 
+    to : BJJPosition,
+    reference : [Reference?],
+    diagram : HTMLImageElement | string | File | null,
+    comments : string | null
+
 }
