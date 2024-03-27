@@ -1,0 +1,32 @@
+{
+  "directed": true,
+  "multigraph": true,
+  "graph": {},
+  "nodes": [
+    {
+      "attr": {
+        "aliases": [],
+        "description": "one leg looped",
+        "pos_type": "",
+        "valid_in_sports": [],
+        "reference": [],
+        "diagram": [],
+        "comments": ""
+      },
+      "id": "half guard"
+    },
+    {
+      "attr": {
+        "aliases": [],
+        "description": "sit on hips",
+        "pos_type": "",
+        "valid_in_sports": [],
+        "reference": [],
+        "diagram": [],
+        "comments": ""
+      },
+      "id": "full guard"
+    }
+  ],
+  "links": []
+}

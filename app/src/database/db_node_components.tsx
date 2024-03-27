@@ -22,11 +22,11 @@ export interface Reference{
 
 export type BJJPosition = {
     name: string,
-    aliases : [string?],
+    aliases : string[],
     description : string,
-    type : BJJPositionType,
-    valid_in_sports : [Sports?], 
-    reference : [Reference?],
+    pos_type : BJJPositionType,
+    valid_in_sports : Sports[], 
+    reference : Reference[],
     diagram : HTMLImageElement | string | File | null,
     comments : string | null
 }
@@ -35,7 +35,7 @@ export type BJJTransition = {
     name : string | null, 
     from : BJJPosition, 
     to : BJJPosition,
-    reference : [Reference?],
+    reference : Reference[],
     diagram : HTMLImageElement | string | File | null,
     comments : string | null
 

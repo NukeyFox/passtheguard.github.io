@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import ReactFlow from 'reactflow'
-import GraphDB from "../db/db_loader";
+import GraphDB from "../database/db_loader";
+import graph from "../database/db.json"
 
 import 'reactflow/dist/style.css';
  

@@ -5,6 +5,8 @@ from networkx import MultiDiGraph, draw
 from networkx.readwrite import json_graph
 import matplotlib.pyplot as plt
 
+
+
 class GraphManager(MultiDiGraph):
     def __init__(self, graph_filename : str, **attr):
         """
@@ -27,5 +29,27 @@ class GraphManager(MultiDiGraph):
         g_json = json_graph.node_link_data(self)
         with open(output_file,"w") as f:
                 json.dump(g_json,f,indent=2)
-        
 
+    def add_node_safe(self, 
+                    name : str,
+                    aliases : list[str] = [],
+                    description : str = "",
+                    pos_type : str = "",
+                    valid_in_sports : list[str] = [],
+                    reference : list[str] = [],
+                    diagram = [], 
+                    comments : str = ""  ):
+        self.add_node(name, 
+                      attr= {"aliases" : aliases,
+                        "description" : description,
+                        "pos_type" : pos_type,
+                        "valid_in_sports" : valid_in_sports,
+                        "reference" : reference,
+                        "diagram" : diagram, 
+                        "comments" :comments })
+        
+if __name__ == "__main__":
+    g = GraphManager("./src/database/db.json")
+    g.add_node_safe("half guard", description="one leg looped")
+    g.add_node_safe("full guard", description="sit on hips")
+    g.save_graph()
