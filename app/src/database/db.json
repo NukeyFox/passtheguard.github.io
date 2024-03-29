@@ -6,6 +6,18 @@
     {
       "attr": {
         "aliases": [],
+        "description": "two legs wrapped around",
+        "pos_type": "",
+        "valid_in_sports": [],
+        "reference": [],
+        "diagram": [],
+        "comments": ""
+      },
+      "id": "closed guard"
+    },
+    {
+      "attr": {
+        "aliases": [],
         "description": "one leg looped",
         "pos_type": "",
         "valid_in_sports": [],
@@ -25,8 +37,39 @@
         "diagram": [],
         "comments": ""
       },
-      "id": "full guard"
+      "id": "mount"
     }
   ],
-  "links": []
+  "links": [
+    {
+      "id": "knee slide pass",
+      "attr": {
+        "aliases": [],
+        "description": "pass your knee over",
+        "valid_in_sports": [],
+        "trans_type": "",
+        "reference": [],
+        "diagram": [],
+        "comments": ""
+      },
+      "source": "half guard",
+      "target": "mount",
+      "key": 0
+    },
+    {
+      "id": "elbow escape (half guard)",
+      "attr": {
+        "aliases": [],
+        "description": "pass your knee over",
+        "valid_in_sports": [],
+        "trans_type": "",
+        "reference": [],
+        "diagram": [],
+        "comments": ""
+      },
+      "source": "half guard",
+      "target": "closed guard",
+      "key": 0
+    }
+  ]
 }

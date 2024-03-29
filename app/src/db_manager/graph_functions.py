@@ -48,8 +48,35 @@ class GraphManager(MultiDiGraph):
                         "diagram" : diagram, 
                         "comments" :comments })
         
+    def add_link_safe(self, 
+                    name : str,
+                    from_pos : str = "",
+                    to_pos : str = "",
+                    description : str = "",
+                    trans_type : str = "",
+                    aliases : list[str] = [],
+                    valid_in_sports : list[str] = [],
+                    reference : list[str] = [],
+                    diagram = [], 
+                    comments : str = ""  ):
+        self.add_edge(u_for_edge= from_pos,
+                      v_for_edge=to_pos, 
+                      id = name,
+                      attr= {
+                          "aliases" : aliases,
+                        "description" : description,
+                        "valid_in_sports" : valid_in_sports,
+                        "trans_type" : trans_type,
+                        "reference" : reference,
+                        "diagram" : diagram, 
+                        "comments" :comments })
+        
 if __name__ == "__main__":
     g = GraphManager("./src/database/db.json")
+    g.add_node_safe("closed guard", description="two legs wrapped around")
     g.add_node_safe("half guard", description="one leg looped")
-    g.add_node_safe("full guard", description="sit on hips")
+    g.add_node_safe("mount", description="sit on hips")
+    g.add_link_safe("knee slide pass", "half guard", "mount", description= "pass your knee over")
+    g.add_link_safe("elbow escape (mount)", "mount", "half guard", description= "pass your knee over")
+    g.add_link_safe("elbow escape (half guard)", "half guard", "closed guard", description= "pass your knee over")
     g.save_graph()
