@@ -1,4 +1,4 @@
-import {BJJPosition, BJJPositionType, BJJTransition, BJJTransitionType} from "./db_node_components"
+import {BJJPosition, BJJPositionType, BJJTransition, BJJTransitionType, Sports} from "./db_node_components"
 import { Node, Edge, MarkerType } from "reactflow"
 import graph from "./db.json"
 
@@ -12,13 +12,13 @@ function getNodes() : BJJPositionMap{
                 entry.id, 
                 {
                     name : entry.id,
-                    aliases : entry.attr.aliases,
-                    description : entry.attr.description,
-                    pos_type : BJJPositionType.Stance,
-                    valid_in_sports : [],
+                    aliases : entry.attr?.aliases || [],
+                    description : entry.attr?.description || "",
+                    pos_type : BJJPositionType[entry.attr.pos_type as keyof typeof BJJPositionType],
+                    valid_in_sports : entry.attr?.valid_in_sports.map((sport) => Sports[sport as keyof typeof Sports]),
                     reference : [],
                     diagram : null,
-                    comments :  null}
+                    comments :  entry.attr.comments}
                 )
     ));
     return node_map;
@@ -77,12 +77,7 @@ function GraphDB() {
     const edgeList = getLinks(nodeMap);
     const initialNodes = createInitialNode(nodeMap);
     const initialEdges = createInitialEdge(edgeList);
-    initialNodes.forEach(function (value) {
-        console.log(value);
-    });
-    initialEdges.forEach(function (value) {
-        console.log(value);
-    });
+  
     return {node_map : nodeMap, edge_list : edgeList, initial_nodes : initialNodes, initial_edges : initialEdges};
 }
 export default GraphDB;

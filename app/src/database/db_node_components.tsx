@@ -1,14 +1,21 @@
 export enum Sports {
-    MMA, BJJ, MuayThai, Wrestling, NoGiBJJ, Judo 
+    MMA = "MMA", 
+    BJJ = "BJJ", 
+    MuayThai = "Muay Thai", 
+    FreestyleWrestling = "Freestyle Wrestling", 
+    NoGiBJJ = "No-gi BJJ", 
+    Judo = "Judo"
 }
 
+
+
 export enum BJJPositionType {
-    Stance, 
-    Guard, 
-    Pin, 
-    Grip,
-    Choke,
-    Submission
+    Stance = "Stance", 
+    Guard = "Guard", 
+    Pin = "Pin", 
+    Grip = "Grip",
+    Choke = "Choke",
+    Submission = "Submission"
 }
 
 export enum BJJTransitionType {
@@ -17,7 +24,7 @@ export enum BJJTransitionType {
     Reversal
 }
 
-export interface Reference{
+export type Reference = {
     resource_type : string,
     resource_name : string | null,
     resource : string

@@ -72,11 +72,28 @@ class GraphManager(MultiDiGraph):
                         "comments" :comments })
         
 if __name__ == "__main__":
-    g = GraphManager("./src/database/db.json")
-    g.add_node_safe("closed guard", description="two legs wrapped around")
-    g.add_node_safe("half guard", description="one leg looped")
-    g.add_node_safe("mount", description="sit on hips")
-    g.add_link_safe("knee slide pass", "half guard", "mount", description= "pass your knee over")
-    g.add_link_safe("elbow escape (mount)", "mount", "half guard", description= "pass your knee over")
-    g.add_link_safe("elbow escape (half guard)", "half guard", "closed guard", description= "pass your knee over")
+    g = GraphManager("./app/src/database/db.json")
+    g.add_node_safe("Closed Guard",
+                    aliases=[],
+                    description="Ground position. Bottom fighter's legs wrapper around the top fighter's waist.",
+                    pos_type="Guard",
+                    valid_in_sports=["MMA", "BJJ", "Freestyle Wrestling", "Judo"],
+                    comments="Bottom player has control in this position.")
+    
+    g.add_node_safe("Half Guard", 
+                    aliases=["Half Mount", "Turk Ride"],
+                    description="Defensive ground position with the bottom fighter's legs looped around a single leg of the top fighter. In BJJ, the bottom fighter wants to sweep, reguard or submit. The top fighter wants to pass the guard.",
+                    pos_type="Guard",
+                    valid_in_sports=["MMA", "BJJ", "Freestyle Wrestling", "Judo"],
+                    comments="Half guard is 50/50 position in BJJ. However, in MMA, it favours the top fighter since they can ground-and-pound.")
+    
+    g.add_node_safe("Mount", 
+                    aliases=[],
+                    description="Ground position. Top flghter sits on the hips on the bottom fighter.",
+                    pos_type="Pin",
+                    valid_in_sports=["MMA", "BJJ", "Freestyle Wrestling", "Judo"],
+                    comments="Favours the top fighter")
+    g.add_link_safe("knee slide pass", "Half Guard", "Mount", description= "pass your knee over")
+   
+    g.add_link_safe("elbow knee escape (from half guard)", "Half Guard", "Closed Guard", description= "pass your knee over")
     g.save_graph()

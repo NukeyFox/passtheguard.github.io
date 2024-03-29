@@ -6,38 +6,56 @@
     {
       "attr": {
         "aliases": [],
-        "description": "two legs wrapped around",
-        "pos_type": "",
-        "valid_in_sports": [],
+        "description": "Ground position. Bottom fighter's legs wrapper around the top fighter's waist.",
+        "pos_type": "Guard",
+        "valid_in_sports": [
+          "MMA",
+          "BJJ",
+          "Freestyle Wrestling",
+          "Judo"
+        ],
         "reference": [],
         "diagram": [],
-        "comments": ""
+        "comments": "Bottom player has control in this position."
       },
-      "id": "closed guard"
+      "id": "Closed Guard"
+    },
+    {
+      "attr": {
+        "aliases": [
+          "Half Mount",
+          "Turk Ride"
+        ],
+        "description": "Defensive ground position with the bottom fighter's legs looped around a single leg of the top fighter. In BJJ, the bottom fighter wants to sweep, reguard or submit. The top fighter wants to pass the guard.",
+        "pos_type": "Guard",
+        "valid_in_sports": [
+          "MMA",
+          "BJJ",
+          "Freestyle Wrestling",
+          "Judo"
+        ],
+        "reference": [],
+        "diagram": [],
+        "comments": "Half guard is 50/50 position in BJJ. However, in MMA, it favours the top fighter since they can ground-and-pound."
+      },
+      "id": "Half Guard"
     },
     {
       "attr": {
         "aliases": [],
-        "description": "one leg looped",
-        "pos_type": "",
-        "valid_in_sports": [],
+        "description": "Ground position. Top flghter sits on the hips on the bottom fighter.",
+        "pos_type": "Pin",
+        "valid_in_sports": [
+          "MMA",
+          "BJJ",
+          "Freestyle Wrestling",
+          "Judo"
+        ],
         "reference": [],
         "diagram": [],
-        "comments": ""
+        "comments": "Favours the top fighter"
       },
-      "id": "half guard"
-    },
-    {
-      "attr": {
-        "aliases": [],
-        "description": "sit on hips",
-        "pos_type": "",
-        "valid_in_sports": [],
-        "reference": [],
-        "diagram": [],
-        "comments": ""
-      },
-      "id": "mount"
+      "id": "Mount"
     }
   ],
   "links": [
@@ -52,12 +70,12 @@
         "diagram": [],
         "comments": ""
       },
-      "source": "half guard",
-      "target": "mount",
+      "source": "Half Guard",
+      "target": "Mount",
       "key": 0
     },
     {
-      "id": "elbow escape (half guard)",
+      "id": "elbow knee escape (from half guard)",
       "attr": {
         "aliases": [],
         "description": "pass your knee over",
@@ -67,8 +85,8 @@
         "diagram": [],
         "comments": ""
       },
-      "source": "half guard",
-      "target": "closed guard",
+      "source": "Half Guard",
+      "target": "Closed Guard",
       "key": 0
     }
   ]
