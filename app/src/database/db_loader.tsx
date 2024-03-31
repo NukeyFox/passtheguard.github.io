@@ -1,16 +1,18 @@
 import {BJJPosition, BJJPositionType, BJJTransition, BJJTransitionType, Sports} from "./db_node_components"
-import { Node, Edge, MarkerType } from "reactflow"
+import { Node, Edge, MarkerType, StraightEdge } from "reactflow"
 import graph from "./db.json"
 
 type BJJPositionMap = Map<string, BJJPosition>;
 
 function getNodes() : BJJPositionMap{
+    var i = 0;
     const node_map = new Map<string, BJJPosition>();
     (graph.nodes).map((entry) => 
         (
             node_map.set(
                 entry.id, 
                 {
+                    id_no : i++,
                     name : entry.id,
                     aliases : entry.attr?.aliases || [],
                     description : entry.attr?.description || "",
@@ -45,27 +47,29 @@ function createInitialNode(node_map : BJJPositionMap) : Node[]{
     var node_list : Node[] = []; 
     node_map.forEach((value, key, map) => (
         node_list.push({
-            id : value.name,
+            id : value.id_no.toString(),
             position : {x : Math.random()*600+50, y : Math.random()*600+50},
-            data : {label : value.name}}
+            data : {label : value.name},
+            connectable: false}
         )
     ));
     return node_list;
 }
 
-function createInitialEdge(edge_list : BJJTransition[]) : Edge[]{
+function createInitialEdge(edge_list : BJJTransition[], node_map : BJJPositionMap) : Edge[]{
     var edge_list_rf : Edge[] = [];
     edge_list.forEach((value, index, array) => (
         edge_list_rf.push({
             id : value.name || "",
-            source : (value.from_pos?.name) || "",
-            target : (value.to_pos?.name) || "",
+            source : node_map.get((value.from_pos?.name) || "")?.id_no.toString() || "",
+            target : node_map.get((value.to_pos?.name) || "")?.id_no.toString() || "",
             label : value.name,
             markerEnd: {
                 type: MarkerType.Arrow,
                 width: 20,
                 height: 20,
               },
+              type : "straight"
         })
     ));
     
@@ -76,7 +80,7 @@ function GraphDB() {
     const nodeMap = getNodes();
     const edgeList = getLinks(nodeMap);
     const initialNodes = createInitialNode(nodeMap);
-    const initialEdges = createInitialEdge(edgeList);
+    const initialEdges = createInitialEdge(edgeList, nodeMap);
   
     return {node_map : nodeMap, edge_list : edgeList, initial_nodes : initialNodes, initial_edges : initialEdges};
 }
