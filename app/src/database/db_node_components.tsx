@@ -31,6 +31,7 @@ export type Reference = {
 }
 
 export type BJJPosition = {
+    id_no : number,
     name: string,
     aliases : string[],
     description : string,
@@ -44,6 +45,7 @@ export type BJJPosition = {
 
 
 export type BJJTransition = {
+
     name : string | null, 
     from_pos : BJJPosition | undefined, 
     to_pos : BJJPosition | undefined,
