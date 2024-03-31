@@ -1,7 +1,7 @@
 import {BJJPosition, BJJPositionType, BJJTransition, BJJTransitionType, Sports} from "./db_node_components"
-import { Node, Edge, MarkerType, StraightEdge } from "reactflow"
+import { Node, Edge, MarkerType } from "reactflow"
 import graph from "./db.json"
-
+import "../app/network/nodestyle.css";
 type BJJPositionMap = Map<string, BJJPosition>;
 
 function getNodes() : BJJPositionMap{
@@ -50,7 +50,9 @@ function createInitialNode(node_map : BJJPositionMap) : Node[]{
             id : value.id_no.toString(),
             position : {x : Math.random()*600+50, y : Math.random()*600+50},
             data : {label : value.name},
-            connectable: false}
+            connectable: false,
+            //type : "custom"
+            }
         )
     ));
     return node_list;
@@ -69,7 +71,7 @@ function createInitialEdge(edge_list : BJJTransition[], node_map : BJJPositionMa
                 width: 20,
                 height: 20,
               },
-              type : "straight"
+              type : "floating"
         })
     ));
     
