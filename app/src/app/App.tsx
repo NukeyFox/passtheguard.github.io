@@ -52,7 +52,8 @@ function App() {
     return useMemo(() => {
       let nodes : SimNode[] = getNodes().map((node,i) => ({ index : parseInt(node.id), x: node.position.x, y: node.position.y, data : node}));
       let edges : SimulationLinkDatum<SimNode>[] = getEdges().map((edge) => ({source : parseInt(edge.source), target : parseInt(edge.target)}));
-    
+      
+      //let edgeCenters = getEdges().map((edge,i) => {index : parseInt()}
   
       simulation.nodes(nodes).force(
         'link',

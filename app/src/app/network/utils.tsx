@@ -71,4 +71,37 @@ function getEdgePosition(node : Node, intersectionPoint : {x : number, y : numbe
       targetPos,
     };
   }
+
+export interface ownBezierPathParams{
+  sourceX : number,
+  sourceY : number, 
+  controlX : number,
+  controlY : number,
+  targetX : number,
+  targetY : number
+}
+
+export function ownBezierPath(
+    {sourceX,
+    sourceY,
+    controlX, 
+    controlY,
+    targetX, 
+    targetY} : ownBezierPathParams 
+) : [path: string, labelX: number, labelY: number, offsetX: number, offsetY: number] {
   
+  // Move to the starting point
+  const path = `M${sourceX},${sourceY} Q ${controlX},${controlY} ${targetX},${targetY}`;
+  const t = 0.5; // Parameter for midpoint
+
+  const x1 = (1 - t) * sourceX + t * controlX;
+  const y1 = (1 - t) * sourceY + t * controlY;
+
+  const x2 = (1 - t) * controlX + t * targetX;
+  const y2 = (1 - t) * controlY + t * targetY;
+
+  const midX = (1 - t) * x1 + t * x2;
+  const midY = (1 - t) * y1 + t * y2;
+
+  return [path,midX,midY,Math.abs(sourceX - midX),Math.abs(sourceY - midY)];
+}

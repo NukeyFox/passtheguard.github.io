@@ -68,14 +68,16 @@
         "trans_type": "",
         "reference": [],
         "diagram": [],
-        "comments": ""
+        "comments": "",
+        "parallel_edges": 3,
+        "edge_no": 0
       },
       "source": "Half Guard",
       "target": "Mount",
-      "key": 0
+      "key": "knee slide pass"
     },
     {
-      "id": "elbow knee escape (from half guard)",
+      "id": "elbow knee escape \n(from half guard)",
       "attr": {
         "aliases": [],
         "description": "pass your knee over",
@@ -83,11 +85,47 @@
         "trans_type": "",
         "reference": [],
         "diagram": [],
-        "comments": ""
+        "comments": "",
+        "parallel_edges": 1,
+        "edge_no": 0
       },
       "source": "Half Guard",
       "target": "Closed Guard",
-      "key": 0
+      "key": "elbow knee escape \n(from half guard)"
+    },
+    {
+      "id": "elbow knee escape \n(from mount)",
+      "attr": {
+        "aliases": [],
+        "description": "pass your knee over",
+        "valid_in_sports": [],
+        "trans_type": "",
+        "reference": [],
+        "diagram": [],
+        "comments": "",
+        "parallel_edges": 3,
+        "edge_no": 1
+      },
+      "source": "Mount",
+      "target": "Half Guard",
+      "key": "elbow knee escape \n(from mount)"
+    },
+    {
+      "id": "kip up escape",
+      "attr": {
+        "aliases": [],
+        "description": "hip hip horray",
+        "valid_in_sports": [],
+        "trans_type": "",
+        "reference": [],
+        "diagram": [],
+        "comments": "",
+        "parallel_edges": 3,
+        "edge_no": 2
+      },
+      "source": "Mount",
+      "target": "Half Guard",
+      "key": "kip up escape"
     }
   ]
 }

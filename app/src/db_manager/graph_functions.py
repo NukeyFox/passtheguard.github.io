@@ -1,6 +1,6 @@
 import json
 import os
-from typing import Optional
+from typing import Optional, Any
 from networkx import MultiDiGraph, draw
 from networkx.readwrite import json_graph
 import matplotlib.pyplot as plt
@@ -16,7 +16,7 @@ class GraphManager(MultiDiGraph):
         if os.path.exists(graph_filename):
             with open(graph_filename, "r") as f:
                 js_graph = json.load(f)
-            self.graph = json_graph.node_link_graph(js_graph)
+            self.graph = MultiDiGraph(json_graph.node_link_graph(js_graph))
         else:
             self.graph = MultiDiGraph()
             g_json = json_graph.node_link_data(self.graph)
@@ -29,6 +29,12 @@ class GraphManager(MultiDiGraph):
         g_json = json_graph.node_link_data(self)
         with open(output_file,"w") as f:
                 json.dump(g_json,f,indent=2)
+
+    def get_parallel_edges(self, source : str, target : str):
+        filter_target = lambda tgt : lambda x : x[1] == tgt
+        outgoing = filter(filter_target(target), self.edges(source, data=False, keys=True))
+        incoming = filter(filter_target(source), self.edges(target, data=False, keys=True))
+        return list(outgoing) + list(incoming)
 
     def add_node_safe(self, 
                     name : str,
@@ -48,6 +54,14 @@ class GraphManager(MultiDiGraph):
                         "diagram" : diagram, 
                         "comments" :comments })
         
+    def update_link_attr(self, 
+                    name : str,
+                    from_pos : str, 
+                    to_pos : str,
+                    updates : dict[str,Any]):
+        for key, val in updates.items():
+            self[from_pos][to_pos][name]["attr"][key] = val
+
     def add_link_safe(self, 
                     name : str,
                     from_pos : str = "",
@@ -59,9 +73,14 @@ class GraphManager(MultiDiGraph):
                     reference : list[str] = [],
                     diagram = [], 
                     comments : str = ""  ):
+        para_edges = self.get_parallel_edges(from_pos,to_pos)
+        if self.has_edge(from_pos,to_pos,name):
+            return #Don't do anything if edge exists already
+        p = len(para_edges)
         self.add_edge(u_for_edge= from_pos,
                       v_for_edge=to_pos, 
                       id = name,
+                      key = name,
                       attr= {
                           "aliases" : aliases,
                         "description" : description,
@@ -69,7 +88,11 @@ class GraphManager(MultiDiGraph):
                         "trans_type" : trans_type,
                         "reference" : reference,
                         "diagram" : diagram, 
-                        "comments" :comments })
+                        "comments" :comments,
+                        "parallel_edges" : p+1,
+                        "edge_no" : p})
+        for from_pos, to_pos, key in para_edges:
+            self.update_link_attr(key,from_pos,to_pos,{"parallel_edges" : p+1})
         
 if __name__ == "__main__":
     g = GraphManager("./app/src/database/db.json")
@@ -93,7 +116,12 @@ if __name__ == "__main__":
                     pos_type="Pin",
                     valid_in_sports=["MMA", "BJJ", "Freestyle Wrestling", "Judo"],
                     comments="Favours the top fighter")
+    
     g.add_link_safe("knee slide pass", "Half Guard", "Mount", description= "pass your knee over")
-   
-    g.add_link_safe("elbow knee escape (from half guard)", "Half Guard", "Closed Guard", description= "pass your knee over")
+    g.add_link_safe("elbow knee escape \n(from mount)", "Mount", "Half Guard", description= "pass your knee over")
+    g.add_link_safe("elbow knee escape \n(from half guard)", "Half Guard", "Closed Guard", description= "pass your knee over")
+    g.add_link_safe("kip up escape", "Mount", "Half Guard", description= "hip hip horray")
+    
     g.save_graph()
+
+    print(g.get_parallel_edges("Mount", "Half Guard"))

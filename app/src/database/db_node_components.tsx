@@ -52,6 +52,8 @@ export type BJJTransition = {
     description : string,
     trans_type : BJJTransitionType,
     aliases : string[],
+    parallel_edges : number,
+    edge_no : number,
     valid_in_sports : Sports[],
     reference : Reference[],
     diagram : HTMLImageElement | string | File | null,

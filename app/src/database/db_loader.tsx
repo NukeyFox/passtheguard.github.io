@@ -27,6 +27,8 @@ function getNodes() : BJJPositionMap{
 }
 
 function getLinks(node_map : BJJPositionMap ) : BJJTransition[]{
+    var sources =  new Map<string, BJJTransition[]>()
+    var targets =  new Map<string, BJJTransition[]>()
     let links : BJJTransition[] = (graph.links).map((entry) => ({
         name : entry.id, 
         from_pos : node_map.get(entry.source), 
@@ -37,10 +39,13 @@ function getLinks(node_map : BJJPositionMap ) : BJJTransition[]{
         valid_in_sports : [],
         reference : [],
         diagram : null,
-        comments : null
+        comments : null,
+        parallel_edges : entry.attr.parallel_edges,
+        edge_no : entry.attr.edge_no
         }
     ));
-    return links;
+
+    return  links;
 }
 
 function createInitialNode(node_map : BJJPositionMap) : Node[]{
@@ -66,6 +71,7 @@ function createInitialEdge(edge_list : BJJTransition[], node_map : BJJPositionMa
             source : node_map.get((value.from_pos?.name) || "")?.id_no.toString() || "",
             target : node_map.get((value.to_pos?.name) || "")?.id_no.toString() || "",
             label : value.name,
+            data : {parallel_edges : value.parallel_edges, edge_no : value.edge_no},
             markerEnd: {
                 type: MarkerType.ArrowClosed,
                 width: 20,

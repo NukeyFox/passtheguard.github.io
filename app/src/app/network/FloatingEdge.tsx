@@ -5,13 +5,14 @@ import {
   EdgeProps,
   getBezierPath,
   getNodesBounds,
+  getSmoothStepPath,
   getStraightPath,
   useNodeId,
   useReactFlow,
 } from 'reactflow';
 
 import './buttonedge.css';
-import { getEdgeParams } from './utils';
+import { getEdgeParams, ownBezierPath } from './utils';
 
 
 export default function CustomEdge({
@@ -22,11 +23,11 @@ export default function CustomEdge({
   sourceY,
   targetX,
   targetY,
-  sourcePosition,
-  targetPosition,
+  
   style = {},
   markerEnd,
-  label
+  label,
+  data
 }: EdgeProps) {
   const { setEdges, getNode } = useReactFlow();
 
@@ -35,15 +36,18 @@ export default function CustomEdge({
 
   const { sx, sy, tx, ty, sourcePos, targetPos } = getEdgeParams(sourceNode, targetNode) ;
   
+  const offset_width = 500;
+  const offset_pos = offset_width * (data.edge_no+1) / (data.parallel_edges+1) - offset_width/2;
 
- 
-    const [edgePath, labelX, labelY] = getStraightPath({
+  const [edgePath, labelX, labelY] = ownBezierPath({
       sourceX : sx || sourceX,
       sourceY : sy || sourceY,
       //sourcePosition : sourcePos || sourcePosition,
       targetX :tx || targetX,
       targetY : ty || targetY,
       //targetPosition : targetPos || targetPosition,
+      controlX : ((sx || sourceX) + (tx || targetX))/2 + offset_pos,
+      controlY : ((sy || sourceY) + (ty || targetY))/2 + offset_pos
     });
 
   const onEdgeClick = () => {
