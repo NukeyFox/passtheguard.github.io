@@ -67,7 +67,7 @@ function createInitialEdge(edge_list : BJJTransition[], node_map : BJJPositionMa
             target : node_map.get((value.to_pos?.name) || "")?.id_no.toString() || "",
             label : value.name,
             markerEnd: {
-                type: MarkerType.Arrow,
+                type: MarkerType.ArrowClosed,
                 width: 20,
                 height: 20,
               },

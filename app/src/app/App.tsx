@@ -36,9 +36,9 @@ function App() {
   }, [selectedNode]);
 
   const simulation = forceSimulation()
-      .force('charge', forceManyBody().strength(-1000))
-      .force('x', forceX().x(0).strength(0.05))
-      .force('y', forceY().y(0).strength(0.05))
+      .force('charge', forceManyBody().strength(-2000))
+      .force('x', forceX().x(0).strength(0.1))
+      .force('y', forceY().y(0).strength(0.1))
       .force('collide', collide())
       .alphaTarget(0.05)
       .stop();
@@ -59,7 +59,7 @@ function App() {
         forceLink(edges)
           .id((d) => d.index || 0)
           .strength(0.05)
-          .distance(200)
+          .distance(350)
       );
   
       // The tick function is called every animation frame while the simulation is

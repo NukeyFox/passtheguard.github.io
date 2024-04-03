@@ -1,35 +1,76 @@
-import { useCallback } from 'react';
-import { useStore, getStraightPath, Edge, MarkerType } from 'reactflow';
+import React from 'react';
+import {
+  BaseEdge,
+  EdgeLabelRenderer,
+  EdgeProps,
+  getBezierPath,
+  getNodesBounds,
+  getStraightPath,
+  useNodeId,
+  useReactFlow,
+} from 'reactflow';
+
+import './buttonedge.css';
 import { getEdgeParams } from './utils';
 
 
+export default function CustomEdge({
+  id,
+  source,
+  target,
+  sourceX,
+  sourceY,
+  targetX,
+  targetY,
+  sourcePosition,
+  targetPosition,
+  style = {},
+  markerEnd,
+  label
+}: EdgeProps) {
+  const { setEdges, getNode } = useReactFlow();
 
-function FloatingEdge({ id, source, target,  style } : Edge) {
-  const sourceNode = useStore(useCallback((store) => store.nodeInternals.get(source), [source]));
-  const targetNode = useStore(useCallback((store) => store.nodeInternals.get(target), [target]));
+  const sourceNode = getNode(source) ;
+  const targetNode = getNode(target) ;
 
-  if (!sourceNode || !targetNode) {
-    return null;
-  }
+  const { sx, sy, tx, ty, sourcePos, targetPos } = getEdgeParams(sourceNode, targetNode) ;
+  
 
-  const { sx, sy, tx, ty } = getEdgeParams(sourceNode, targetNode);
+ 
+    const [edgePath, labelX, labelY] = getStraightPath({
+      sourceX : sx || sourceX,
+      sourceY : sy || sourceY,
+      //sourcePosition : sourcePos || sourcePosition,
+      targetX :tx || targetX,
+      targetY : ty || targetY,
+      //targetPosition : targetPos || targetPosition,
+    });
 
-  const [edgePath] = getStraightPath({
-    sourceX: sx,
-    sourceY: sy,
-    targetX: tx,
-    targetY: ty,
-  });
+  const onEdgeClick = () => {
+    //Make it so that clicking the edge  label opens up the panel 
+  };
 
   return (
-    <path
-      id={id}
-      className="react-flow__edge-path"
-      d={edgePath}
-      markerEnd={MarkerType.Arrow}
-      style={style}
-    />
+    <>
+      <BaseEdge path={edgePath} markerEnd={markerEnd} style={style} />
+      <EdgeLabelRenderer>
+        <div
+          style={{
+            position: 'absolute',
+            transform: `translate(-50%, -50%) translate(${labelX}px,${labelY}px)`,
+            fontSize: 10,
+            pointerEvents: 'all',
+            background: '#bad0de',
+            padding: 5,
+            borderRadius: 2,
+            fontWeight: 500,
+            color : "#000000"
+          }}
+          className="nopan"
+        >
+          {label}
+        </div>
+      </EdgeLabelRenderer>
+    </>
   );
 }
-
-export default FloatingEdge;
