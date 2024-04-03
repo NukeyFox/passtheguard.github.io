@@ -90,9 +90,8 @@ export function ownBezierPath(
     targetY} : ownBezierPathParams 
 ) : [path: string, labelX: number, labelY: number, offsetX: number, offsetY: number] {
   
-  // Move to the starting point
   const path = `M${sourceX},${sourceY} Q ${controlX},${controlY} ${targetX},${targetY}`;
-  const t = 0.5; // Parameter for midpoint
+  const t = 0.5; 
 
   const x1 = (1 - t) * sourceX + t * controlX;
   const y1 = (1 - t) * sourceY + t * controlY;
