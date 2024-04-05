@@ -2,6 +2,7 @@ import React, {useState, useEffect, useCallback, useMemo} from 'react';
 import './App.css';
 import ReactFlow, { Node, Edge, useNodesState, useEdgesState, useReactFlow, useStore, ReactFlowProvider, addEdge } from 'reactflow'
 import GraphDB from "../database/db_loader";
+import { Choices } from './infopanel/infopanel_components';
 import PanelOverlay from "./infopanel/InfoPanel"
 import { forceSimulation, forceLink, forceManyBody, forceX, forceY, SimulationNodeDatum, SimulationLinkDatum } from 'd3-force';
 import collide from './collide';
@@ -9,6 +10,7 @@ import 'reactflow/dist/style.css';
 import FloatingEdge from './network/FloatingEdge';
 import CustomNode from './network/CustomNode';
 import { BJJPosition, BJJTransition } from '../database/db_node_components';
+
 
 interface SimNode extends SimulationNodeDatum{
   data : Node<BJJPosition>
@@ -24,16 +26,18 @@ function App() {
   const data = GraphDB();
   const [nodes, setNodes, onNodesChange] = useNodesState<BJJPosition>(data.initial_nodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState<BJJTransition>(data.initial_edges);
+  const [choice, setChoice] = useState<Choices>(Choices.None)
 
   const [isOpen, setIsOpen] = useState(false);
 
 
-  const [selectedNode, setSelectedNode] = useState<Node<BJJPosition>|undefined>(undefined);
+  const [selectedNode, setSelectedNode] = useState<BJJPosition|undefined>(undefined);
   const onNodeClick = useCallback((event: React.MouseEvent<Element>, node: Node<BJJPosition>) => {
-    console.log('Node clicked:', node);
-    if (selectedNode === node) setSelectedNode(undefined);
-    else setSelectedNode(node);
-    // Perform actions based on the clicked node data or id here
+    if (selectedNode === node.data) 
+      {setSelectedNode(undefined); }
+    else
+     {setSelectedNode(node.data); 
+      setChoice(Choices.BJJPositionSelection)};
   }, [selectedNode]);
 
   const simulation = forceSimulation()
@@ -85,7 +89,7 @@ function App() {
   };
 
   useLayoutedElements();
-  const onConnect = useCallback((params : Edge) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
+  //const onConnect = useCallback((params : Edge) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
 
   return (
     <div className="App">
@@ -102,7 +106,8 @@ function App() {
               style={{backgroundColor:"#000000"}}
             />
           </div>
-       {selectedNode && <PanelOverlay onClose={() => setSelectedNode(undefined)} pos={data.node_map.get(selectedNode.data.label)}>childre 
+       {<PanelOverlay selection={choice}
+                      data={selectedNode }>children 
         </PanelOverlay>}
         </div>
 

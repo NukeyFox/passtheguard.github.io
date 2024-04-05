@@ -1,76 +1,71 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import './Infopanel.css';
-import { BJJPosition, BJJPositionType, Sports } from '../../database/db_node_components';
+import { BJJPosition, BJJPositionType, BJJTransition, Sports } from '../../database/db_node_components';
+import { Choices } from './infopanel_components';
+
+
+function formatPositionContent(pos : BJJPosition) : JSX.Element {
+  return (
+      <>
+      <p className="content-title">{pos?.label}</p>
+      <p className='content-subtext'>{pos?.description}</p>
+      <p className='content-subtext'>
+          <strong>Also known as:</strong> {pos?.aliases.join(", ")}</p>
+
+      <p className='content-subtext'>
+          <strong>Position type:</strong> {pos?.pos_type}</p>
+
+      <p className='content-subtext'>
+          { (pos)  
+           ? <><strong>Valid in: </strong> {pos.valid_in_sports.join(", ")}</> 
+           : <>Not valid in any sport</>}
+          {pos?.valid_in_sports}</p>
+      
+
+      
+      <p className='content-subtext'>
+          <strong>Variations: </strong> To be implemented</p>
+     
+      <p className='content-references-title'>References</p>
+      <p className='content-subtext'>To be implemented</p>
+      <p>{pos?.reference.map((ref)=>ref.resource_name)}</p>
+     
+      <p>{pos?.reference.map((ref)=>ref.resource_name)}</p>
+      <p className='content-subtext'>{pos.comments}</p>
+      </>
+  );
+}
 
 interface PanelOverlayProps {
-    isOpen?: boolean;          // Optional prop to control panel visibility (defaults to false)
-    onClose?: () => void;      // Callback function to be triggered when the panel is closed
-    pos : BJJPosition | undefined;
+    selection : Choices | undefined,
+    data : BJJPosition | BJJTransition | undefined,
     children: React.ReactNode; // Content to be displayed inside the panel
   }
 
 
-function formatPositionContent(pos : BJJPosition) : JSX.Element {
-    return (
-        <>
-        <p className="content-title">{pos?.label}</p>
-        <p className='content-subtext'>{pos?.description}</p>
-        <p className='content-subtext'>
-            <strong>Also known as:</strong> {pos?.aliases.join(", ")}</p>
 
-        <p className='content-subtext'>
-            <strong>Position type:</strong> {pos?.pos_type}</p>
 
-        <p className='content-subtext'>
-            { (pos)  
-             ? <><strong>Valid in: </strong> {pos.valid_in_sports.join(", ")}</> 
-             : <>Not valid in any sport</>}
-            {pos?.valid_in_sports}</p>
-        
+const PanelOverlay: React.FC<PanelOverlayProps> = ({selection, data}) => {
 
-        
-        <p className='content-subtext'>
-            <strong>Variations: </strong> To be implemented</p>
-       
-        <p className='content-references-title'>References</p>
-        <p className='content-subtext'>To be implemented</p>
-        <p>{pos?.reference.map((ref)=>ref.resource_name)}</p>
-       
-        <p>{pos?.reference.map((ref)=>ref.resource_name)}</p>
-        <p className='content-subtext'>{pos.comments}</p>
-        </>
-    );
-}
-
-const PanelOverlay: React.FC<PanelOverlayProps> = ({
-  isOpen = false,
-  onClose,
-  pos
-}) => {
-  const [isVisible, setIsVisible] = useState(true);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const [elem, setElem] = useState<JSX.Element>(<p>No content!</p>)
 
-  const handleClose = () => {
-    setIsVisible(false);
-    onClose?.(); // Call the provided onClose callback if it exists
-  };
+  const renderPanel = useCallback((
+          selection : Choices | undefined,
+          data : BJJPosition | BJJTransition | undefined) =>{
+        if (data != undefined){
+          switch(selection){
+            case Choices.BJJPositionSelection:
+              setElem(formatPositionContent(data as BJJPosition));
+              break;
+            }
+          }
+      },[selection,data])
 
-  const handleClickOutside :  (event: MouseEvent) => void = (event: MouseEvent) => {
-    if (event.currentTarget === overlayRef.current) {
-        handleClose();
-      }
-  };
-
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside); // Add event listener
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside); // Remove on cleanup
-    };
-  }, []); // Empty dependency array to run only once
+      useEffect(() => {renderPanel(selection,data);},[renderPanel]);
+      
 
   return (
-    ( isVisible ?  ((pos || null) &&
      ( 
      
      <div
@@ -78,14 +73,10 @@ const PanelOverlay: React.FC<PanelOverlayProps> = ({
         className={`panel-overlay`}
       >
         <div className="panel-content">
-            {(pos && formatPositionContent(pos)) || <p>No content found!</p>}
-            <button className="panel-close" onClick={handleClose}>
-                <span aria-label="Close Panel">&#x2716;</span>
-            </button>
+            {elem}
         </div>
-      </div>))  : null
-    )
-  );
+      </div>)) 
+
 };
 
 export default PanelOverlay;
