@@ -1,23 +1,16 @@
-.panel-container {
-    position: relative; /* For absolute positioning of the panel */
-  }
   
   .panel-overlay {
-    position: absolute;
+    position: relative;
     right: 0; /* Off-screen to the right */
-    top: 50px;
-    width: 30vw;
+    top: 0px;
+    width: 25vw;
     background-color: white;
     border: 1px solid lightgray;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
     padding: 20px;
-    height: 80vh;
+    height: 100vh;
     transition: right 1s ease-in-out; /* Animation for sliding */
-  }
-  
-  .panel-overlay.open { /* Add a class name for open state */
-    right: 0; /* Slide in from the right */
   }
 
   .panel-overlay .panel-content {

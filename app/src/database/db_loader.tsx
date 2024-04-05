@@ -51,7 +51,7 @@ function createInitialNode(node_map : BJJPositionMap) : Node<BJJPosition>[]{
     node_map.forEach((value, key, map) => (
         node_list.push({
             id : value.id_no.toString(),
-            position : {x : Math.random()*600+50, y : Math.random()*600+50},
+            position : {x : Math.random()*1000+50, y : Math.random()*1000+50},
             data : value,
             connectable: false,
             type : "custom"

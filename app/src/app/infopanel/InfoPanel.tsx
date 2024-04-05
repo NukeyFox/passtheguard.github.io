@@ -13,7 +13,7 @@ interface PanelOverlayProps {
 function formatPositionContent(pos : BJJPosition) : JSX.Element {
     return (
         <>
-        <p className="content-title">{pos?.name}</p>
+        <p className="content-title">{pos?.label}</p>
         <p className='content-subtext'>{pos?.description}</p>
         <p className='content-subtext'>
             <strong>Also known as:</strong> {pos?.aliases.join(", ")}</p>
@@ -75,7 +75,7 @@ const PanelOverlay: React.FC<PanelOverlayProps> = ({
      
      <div
         ref={overlayRef}
-        className={`panel-overlay ${isVisible ? 'open' : ''}`}
+        className={`panel-overlay`}
       >
         <div className="panel-content">
             {(pos && formatPositionContent(pos)) || <p>No content found!</p>}

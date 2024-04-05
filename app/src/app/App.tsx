@@ -72,7 +72,7 @@ function App() {
         setNodes(nodes.map((node) => ({ ...node.data, position: { x: node.x || node.data.position.x, y: node.y || node.data.position.y} })));
         window.requestAnimationFrame(() => {
         fitView();
-        if (simulation.alpha() < 0.1) simulation.stop();
+        if (simulation.alpha() < 0.5) simulation.stop();
         else tick();
         
         });
@@ -89,10 +89,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-       
-
-        <p style={{ width: "100vw", height: "80vh" }}>
+        <div style={{ width: "70vw", height: "100vh"}}>
             <ReactFlow
               nodes={nodes}
               edges={edges}
@@ -102,12 +99,12 @@ function App() {
               fitView
               edgeTypes={edgeTypes}
               nodeTypes={nodeTypes}
+              style={{backgroundColor:"#000000"}}
             />
-          </p>
+          </div>
        {selectedNode && <PanelOverlay onClose={() => setSelectedNode(undefined)} pos={data.node_map.get(selectedNode.data.label)}>childre 
         </PanelOverlay>}
-      </header>
-    </div>
+        </div>
 
   );
 }
