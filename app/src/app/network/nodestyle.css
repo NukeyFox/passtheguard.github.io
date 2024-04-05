@@ -1,12 +1,18 @@
-.customNodeBody {
-    width: 150px;
-    height: 80px;
-    border: 3px solid black;
-    position: relative;
-    overflow: hidden;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-  }
+.custom-node {
+  height: 30px;
+  border: 1px solid #eee;
+  padding: 5px;
+  border-radius: 5px;
+  background: white;
+  z-index: -1;
+}
+
+.custom-node label {
+  display: block;
+  color: #777;
+  font-size: 12px;
+}
+
+.handle-style{
+  visibility: hidden;
+}

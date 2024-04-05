@@ -8,9 +8,10 @@ import collide from './collide';
 import 'reactflow/dist/style.css';
 import FloatingEdge from './network/FloatingEdge';
 import CustomNode from './network/CustomNode';
+import { BJJPosition, BJJTransition } from '../database/db_node_components';
 
 interface SimNode extends SimulationNodeDatum{
-  data : Node
+  data : Node<BJJPosition>
 }
 const edgeTypes = {
   floating: FloatingEdge,
@@ -21,14 +22,14 @@ const nodeTypes = {
 
 function App() {
   const data = GraphDB();
-  const [nodes, setNodes, onNodesChange] = useNodesState(data.initial_nodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(data.initial_edges);
+  const [nodes, setNodes, onNodesChange] = useNodesState<BJJPosition>(data.initial_nodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState<BJJTransition>(data.initial_edges);
 
   const [isOpen, setIsOpen] = useState(false);
 
 
-  const [selectedNode, setSelectedNode] = useState<Node|undefined>(undefined);
-  const onNodeClick = useCallback((event: React.MouseEvent<Element>, node: Node) => {
+  const [selectedNode, setSelectedNode] = useState<Node<BJJPosition>|undefined>(undefined);
+  const onNodeClick = useCallback((event: React.MouseEvent<Element>, node: Node<BJJPosition>) => {
     console.log('Node clicked:', node);
     if (selectedNode === node) setSelectedNode(undefined);
     else setSelectedNode(node);
@@ -44,7 +45,7 @@ function App() {
       .stop();
 
   const useLayoutedElements = () => {
-        const { getNodes, setNodes, getEdges, fitView } = useReactFlow();
+        const { getNodes, setNodes, getEdges, fitView } = useReactFlow<BJJPosition, BJJTransition>();
         const initialised = useStore((store) =>
           [...store.nodeInternals.values()].every((node) => node.width && node.height)
         );

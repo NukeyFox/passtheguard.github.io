@@ -11,8 +11,8 @@ import {
   useReactFlow,
 } from 'reactflow';
 
-import './buttonedge.css';
 import { getEdgeParams, ownBezierPath } from './utils';
+import { BJJPosition, BJJTransition } from '../../database/db_node_components';
 
 
 export default function CustomEdge({
@@ -28,8 +28,8 @@ export default function CustomEdge({
   markerEnd,
   label,
   data
-}: EdgeProps) {
-  const { setEdges, getNode } = useReactFlow();
+}: EdgeProps<BJJTransition>) {
+  const { setEdges, getNode } = useReactFlow<BJJPosition>();
 
   const sourceNode = getNode(source) ;
   const targetNode = getNode(target) ;
@@ -37,7 +37,7 @@ export default function CustomEdge({
   const { sx, sy, tx, ty, sourcePos, targetPos } = getEdgeParams(sourceNode, targetNode) ;
   
   const offset_width = 500;
-  const offset_pos = offset_width * (data.edge_no+1) / (data.parallel_edges+1) - offset_width/2;
+  const offset_pos = offset_width * ((data?.edge_no || 0)+1 ) / ((data?.parallel_edges || 0)+1) - offset_width/2;
 
   const [edgePath, labelX, labelY] = ownBezierPath({
       sourceX : sx || sourceX,

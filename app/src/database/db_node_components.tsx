@@ -32,7 +32,7 @@ export type Reference = {
 
 export type BJJPosition = {
     id_no : number,
-    name: string,
+    label: string,
     aliases : string[],
     description : string,
     pos_type : BJJPositionType,
