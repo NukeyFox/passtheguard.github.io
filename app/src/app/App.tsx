@@ -31,14 +31,24 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
 
 
-  const [selectedNode, setSelectedNode] = useState<BJJPosition|undefined>(undefined);
+  const [selectedElem, setselectedElem] = useState<BJJPosition|BJJTransition|undefined>(undefined);
   const onNodeClick = useCallback((event: React.MouseEvent<Element>, node: Node<BJJPosition>) => {
-    if (selectedNode === node.data) 
-      {setSelectedNode(undefined); }
+    if (selectedElem === node.data) 
+      {setselectedElem(undefined); }
     else
-     {setSelectedNode(node.data); 
+     {setselectedElem(node.data); 
       setChoice(Choices.BJJPositionSelection)};
-  }, [selectedNode]);
+  }, [selectedElem]);
+
+  const onEdgeClick = useCallback((event: React.MouseEvent<Element>, edge: Edge<BJJTransition>) => {
+    if (selectedElem === edge.data) 
+    {setselectedElem(undefined); }
+    else
+    {
+      setselectedElem(edge.data); 
+      setChoice(Choices.BJJTransitionSelection)
+    };
+  }, [selectedElem]);
 
   const simulation = forceSimulation()
       .force('charge', forceManyBody().strength(-2000))
@@ -100,6 +110,7 @@ function App() {
               onNodesChange={onNodesChange}
               onEdgesChange={onEdgesChange}
               onNodeClick={onNodeClick}
+              onEdgeClick={onEdgeClick}
               fitView
               edgeTypes={edgeTypes}
               nodeTypes={nodeTypes}
@@ -107,7 +118,7 @@ function App() {
             />
           </div>
        {<PanelOverlay selection={choice}
-                      data={selectedNode }>children 
+                      data={selectedElem }>children 
         </PanelOverlay>}
         </div>
 
