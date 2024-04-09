@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import './Infopanel.css';
 import { BJJPosition, BJJPositionType, BJJTransition, Sports } from '../../database/db_node_components';
 import { Choices } from './infopanel_components';
+import ReferencePanel from './ReferencePanel';
 
 
 function formatPositionContent(pos : BJJPosition) : JSX.Element {
@@ -26,11 +27,7 @@ function formatPositionContent(pos : BJJPosition) : JSX.Element {
       <p className='content-subtext'>
           <strong>Variations: </strong> To be implemented</p>
      
-      <p className='content-references-title'>References</p>
-      <p className='content-subtext'>To be implemented</p>
-      <p>{pos?.reference.map((ref)=>ref.resource_name)}</p>
-     
-      <p>{pos?.reference.map((ref)=>ref.resource_name)}</p>
+      <ReferencePanel title='References' content={["ITem1", "Item2", "Item3","Item45","Item80","Itemutem","Itere","ertkejrjkerkjelrhtkjehkjhelrhtlerh","vageu tweet", "hello there!","halfguard"]}/>
       <p className='content-subtext'>{pos.comments}</p>
       </>
   );

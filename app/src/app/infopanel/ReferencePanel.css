@@ -1,0 +1,20 @@
+.menu-icon {
+    margin-left: 5px; /* Adjust spacing between title and icon */
+    font-size: 12px; /* Adjust icon size */
+  }
+  .menu-title {
+    background-color: #f5f5f5; /* Light gray background */
+    border: none; /* Remove button border */
+    padding: 10px 15px; /* Add some padding */
+    cursor: pointer; /* Indicate clickable element */
+    font-weight: bold; /* Make text bold */
+    font-size: 18px;
+  }
+  
+  
+  .menu-content ul {
+    max-height: 50px;
+    overflow-y: auto;
+    /* Add any additional styles for the list here */
+  }
+  

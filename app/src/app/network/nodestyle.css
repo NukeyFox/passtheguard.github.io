@@ -8,6 +8,7 @@
   text-align: center;
   line-height: 30px;
   position: relative;
+  cursor: pointer ;
 }
 
 .custom-node label {
