@@ -9,19 +9,25 @@
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
     padding: 20px;
-    height: 100vh;
+    height: 95vh;
     transition: right 1s ease-in-out; /* Animation for sliding */
+    max-height: 95vh;
   }
 
   .panel-overlay .panel-content {
+    max-height: 95vh;
     color: black; /* Applies to all text elements within the panel content */
+    overflow-y: auto;
   }
 
   .content-title {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', sSans-serif;
     color: rgb(0, 0, 0);
-    font-size: 32px;
+    font-size: 24px;
+    flex: 1;
     text-align: center;
+    margin-top: 20px;
+ 
   }
 
   .content-subtext {
@@ -45,17 +51,25 @@
     text-align: left;
   }
 
-  .panel-close {
-    position: absolute; /* Position the button within the panel */
-    top: 10px; /* Adjust top position as desired */
-    left: 10px; /* Adjust right position as desired */
-    background-color: transparent; /* Remove default background */
-    border: none; /* Remove default border */
-    cursor: pointer; /* Set cursor to pointer on hover */
-    font-size: 18px; /* Adjust font size as desired */
-    color: #ccc; /* Adjust color as desired */
+
+  .close-button {
+    background: none; /* Remove default button styles */
+    border: none;
+    padding: 2px; /* Add some padding for spacing */
+    cursor: pointer;
+    color: #999; /* Dim gray color */
+    font-weight: bold;
+    text-align: left;
+    flex : 1;
+    flex-direction: row;
+    position: absolute;
+    top: 15px; /* Set top position to 10px from the top */
+    left: 15px; /* Set left position to 10px from the left */
   }
-  
-  .panel-close:hover {
-    color: #aaa; /* Change color on hover (optional) */
+
+  .menu-header {
+    /* Existing styles... */
+
+    display: flex; /* Allow buttons to sit side-by-side */
+    align-items: baseline; /* Align buttons along their baselines */
   }

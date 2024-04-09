@@ -13,7 +13,7 @@
   
   
   .menu-content ul {
-    max-height: 50px;
+    max-height: 300px;
     overflow-y: auto;
     /* Add any additional styles for the list here */
   }

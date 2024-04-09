@@ -32,6 +32,8 @@ function App() {
 
 
   const [selectedElem, setselectedElem] = useState<BJJPosition|BJJTransition|undefined>(undefined);
+  
+
   const onNodeClick = useCallback((event: React.MouseEvent<Element>, node: Node<BJJPosition>) => {
     if (selectedElem === node.data) 
       {setselectedElem(undefined); }
@@ -118,7 +120,8 @@ function App() {
             />
           </div>
        {<PanelOverlay selection={choice}
-                      data={selectedElem }>children 
+                      data={selectedElem}
+                      nullFunc={() => {setChoice(Choices.None)}}>children 
         </PanelOverlay>}
         </div>
 

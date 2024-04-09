@@ -5,10 +5,11 @@ import { Choices } from './infopanel_components';
 import ReferencePanel from './ReferencePanel';
 
 
-function formatPositionContent(pos : BJJPosition) : JSX.Element {
+function formatPositionContent(pos : BJJPosition, handleClose : ()=>void) : JSX.Element {
   return (
       <>
-      <p className="content-title">{pos?.label}</p>
+        <div className="content-title">{pos?.label}</div>
+
       <p className='content-subtext'>{pos?.description}</p>
       <p className='content-subtext'>
           <strong>Also known as:</strong> {pos?.aliases.join(", ")}</p>
@@ -33,10 +34,11 @@ function formatPositionContent(pos : BJJPosition) : JSX.Element {
   );
 }
 
-function formatEdgeContent(pos : BJJTransition) : JSX.Element {
+function formatEdgeContent(pos : BJJTransition, handleClose : () => void) : JSX.Element {
   return (
       <>
-      <p className="content-title">{pos?.name}</p>
+
+        <div className="content-title">{pos?.name}</div>
       <p className='content-subtext' style={{textAlign:"center"}}> {pos?.from_pos?.label} → {pos?.to_pos?.label} </p>
       <p className='content-subtext'>{pos?.description}</p>
       <p className='content-subtext'>
@@ -66,19 +68,29 @@ function formatEdgeContent(pos : BJJTransition) : JSX.Element {
   );
 }
 
+function mainPanel() {
+  return (
+    <>
+      <p> Search: </p>
+      <p> Find Sequence: </p>
+    </>
+  )
+}
+
 interface PanelOverlayProps {
     selection : Choices | undefined,
     data : BJJPosition | BJJTransition | undefined,
+    nullFunc : () => void,
     children: React.ReactNode; // Content to be displayed inside the panel
   }
 
 
 
 
-const PanelOverlay: React.FC<PanelOverlayProps> = ({selection, data}) => {
+const PanelOverlay: React.FC<PanelOverlayProps> = ({selection, data, nullFunc}) => {
 
   const overlayRef = useRef<HTMLDivElement>(null);
-  const [elem, setElem] = useState<JSX.Element>(<p>No content!</p>)
+  const [elem, setElem] = useState<JSX.Element>(mainPanel())
 
   const renderPanel = useCallback((
           selection : Choices | undefined,
@@ -87,13 +99,17 @@ const PanelOverlay: React.FC<PanelOverlayProps> = ({selection, data}) => {
           switch(selection){
             case Choices.BJJPositionSelection:
               {
-              setElem(formatPositionContent(data as BJJPosition));
+              setElem(formatPositionContent(data as BJJPosition, nullFunc));
               break;
             }
             case Choices.BJJTransitionSelection:
               {
-                setElem(formatEdgeContent(data as BJJTransition));
+                setElem(formatEdgeContent(data as BJJTransition, nullFunc));
                 break;
+              }
+            default:
+              {
+                setElem(mainPanel())
               }
             }
           }
@@ -110,7 +126,10 @@ const PanelOverlay: React.FC<PanelOverlayProps> = ({selection, data}) => {
         className={`panel-overlay`}
       >
         <div className="panel-content">
-            {elem}
+        {selection != Choices.None && <button className="close-button" onClick={nullFunc}>
+            <span>&#10006;</span> {/* Unicode character for "X" */}
+        </button>}
+          {elem}
         </div>
       </div>)) 
 

@@ -19,7 +19,6 @@ function getNodes() : BJJPositionMap{
                     pos_type : BJJPositionType[entry.attr.pos_type as keyof typeof BJJPositionType],
                     valid_in_sports : entry.attr?.valid_in_sports.map((sport) => Sports[sport as keyof typeof Sports]),
                     reference : [],
-                    diagram : null,
                     comments :  entry.attr.comments}
                 )
     ));

@@ -7,6 +7,12 @@ export enum Sports {
     Judo = "Judo"
 }
 
+export enum ResourceType {
+    Image = "Image",
+    YoutubeVideo = "YoutubeVideo",
+    Article = "Article",
+    Instructional = "Instructional"
+}
 
 
 export enum BJJPositionType {
@@ -25,7 +31,7 @@ export enum BJJTransitionType {
 }
 
 export type Reference = {
-    resource_type : string,
+    resource_type : ResourceType,
     resource_name : string | null,
     resource : string
 }
@@ -38,7 +44,6 @@ export type BJJPosition = {
     pos_type : BJJPositionType,
     valid_in_sports : Sports[], 
     reference : Reference[],
-    diagram : HTMLImageElement | string | File | null,
     comments : string | null
 }
 
@@ -56,7 +61,6 @@ export type BJJTransition = {
     edge_no : number,
     valid_in_sports : Sports[],
     reference : Reference[],
-    diagram : HTMLImageElement | string | File | null,
     comments : string | null
 
 }
