@@ -14,6 +14,7 @@
           "Freestyle Wrestling",
           "Judo"
         ],
+        "variations": [],
         "reference": [],
         "diagram": [],
         "comments": "Bottom player has control in this position."
@@ -34,6 +35,7 @@
           "Freestyle Wrestling",
           "Judo"
         ],
+        "variations": [],
         "reference": [],
         "diagram": [],
         "comments": "Half guard is 50/50 position in BJJ. However, in MMA, it favours the top fighter since they can ground-and-pound."
@@ -51,6 +53,7 @@
           "Freestyle Wrestling",
           "Judo"
         ],
+        "variations": [],
         "reference": [],
         "diagram": [],
         "comments": "Favours the top fighter"
@@ -67,6 +70,7 @@
         "valid_in_sports": [],
         "trans_type": "",
         "reference": [],
+        "variations": [],
         "diagram": [],
         "comments": "",
         "parallel_edges": 3,
@@ -84,6 +88,7 @@
         "valid_in_sports": [],
         "trans_type": "",
         "reference": [],
+        "variations": [],
         "diagram": [],
         "comments": "",
         "parallel_edges": 1,
@@ -101,6 +106,7 @@
         "valid_in_sports": [],
         "trans_type": "",
         "reference": [],
+        "variations": [],
         "diagram": [],
         "comments": "",
         "parallel_edges": 3,
@@ -118,6 +124,7 @@
         "valid_in_sports": [],
         "trans_type": "",
         "reference": [],
+        "variations": [],
         "diagram": [],
         "comments": "",
         "parallel_edges": 3,
@@ -125,7 +132,7 @@
       },
       "source": "Mount",
       "target": "Half Guard",
-      "key": "kip up escape"
+      "key": "kipping escape"
     }
   ]
 }

@@ -17,6 +17,7 @@ function getNodes() : BJJPositionMap{
                     aliases : entry.attr?.aliases || [],
                     description : entry.attr?.description || "",
                     pos_type : BJJPositionType[entry.attr.pos_type as keyof typeof BJJPositionType],
+                    variations : entry.attr.variations,
                     valid_in_sports : entry.attr?.valid_in_sports.map((sport) => Sports[sport as keyof typeof Sports]),
                     reference : [],
                     comments :  entry.attr.comments}
@@ -32,6 +33,7 @@ function getLinks(node_map : BJJPositionMap ) : BJJTransition[]{
         to_pos : node_map.get(entry.target),
         description : entry.attr.description,
         trans_type : BJJTransitionType.Takedown,
+        variations : entry.attr.variations,
         aliases : entry.attr.reference,
         valid_in_sports : [],
         reference : [],

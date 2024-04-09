@@ -6,7 +6,7 @@ import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 interface ExpandableMenuItemProps {
     title: string;
-    content: string[];
+    content: Reference[];
     isOpen?: boolean; // Optional prop for initial open state
     onToggle?: () => void; // Optional callback for toggle events
   }
@@ -36,7 +36,7 @@ interface ExpandableMenuItemProps {
           <div className="menu-content">
             <ul>
               {content.map((item, index) => (
-                <li key={index}>{item}</li>
+                <li key={index}>{item.resource}</li>
               ))}
             </ul>
           </div>
