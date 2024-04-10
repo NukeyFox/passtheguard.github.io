@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useCallback, useMemo} from 'react';
 import './App.css';
-import ReactFlow, { Node, Edge, useNodesState, useEdgesState, useReactFlow, useStore, ReactFlowProvider, addEdge } from 'reactflow'
+import ReactFlow, { Node, Edge, useNodesState, useEdgesState, useReactFlow, useStore, ReactFlowProvider, addEdge, useOnSelectionChange } from 'reactflow'
 import GraphDB from "../database/db_loader";
 import { Choices } from './infopanel/infopanel_components';
 import PanelOverlay from "./infopanel/InfoPanel"
@@ -9,6 +9,7 @@ import collide from './collide';
 import 'reactflow/dist/style.css';
 import FloatingEdge from './network/FloatingEdge';
 import CustomNode from './network/CustomNode';
+import SelectedNode from "./network/SelectedNode"
 import { BJJPosition, BJJTransition } from '../database/db_node_components';
 
 
@@ -20,6 +21,7 @@ const edgeTypes = {
 };
 const nodeTypes = {
   custom: CustomNode,
+  selected : SelectedNode
 };
 
 function App() {
@@ -32,24 +34,44 @@ function App() {
 
 
   const [selectedElem, setselectedElem] = useState<BJJPosition|BJJTransition|undefined>(undefined);
-  
+  const [adjustNodes, setAdjustNodes] = useState<boolean>(true);
 
   const onNodeClick = useCallback((event: React.MouseEvent<Element>, node: Node<BJJPosition>) => {
-    if (selectedElem === node.data) 
-      {setselectedElem(undefined); }
-    else
-     {setselectedElem(node.data); 
-      setChoice(Choices.BJJPositionSelection)};
-  }, [selectedElem]);
+      resetNodesEdges();
+      setselectedElem(node.data); 
+      highlightNodes([node.id])
+      setChoice(Choices.BJJPositionSelection)}, [selectedElem]);
+
+  const resetNodesEdges = (() => {
+    setNodes((prevNodes) =>
+      prevNodes.map((n) => 
+        ({ ...n, type : 'custom' })));
+    setEdges((prevEdge) =>
+      prevEdge.map((e) => 
+        ({ ...e, style : {...e.style, stroke : "white"}})));
+  });
+
+  const highlightNodes = ((nodesId : string[]) => (
+      setNodes((prevNodes) =>
+        prevNodes.map((n) => 
+          (nodesId.some((x) => x === n.id) ?
+            { ...n, type : 'selected' } : 
+            { ...n, type : 'custom' })))
+  ));
+
+  const highlightEdges = ((edgesId : string[]) => (
+    setEdges((prevNodes) =>
+      prevNodes.map((e) => 
+        (edgesId.some((x) => x === e.id) ?
+          { ...e, style : {...e.style, stroke : "red"}} : 
+          { ...e, style : {...e.style, stroke : "white"}})))
+));
 
   const onEdgeClick = useCallback((event: React.MouseEvent<Element>, edge: Edge<BJJTransition>) => {
-    if (selectedElem === edge.data) 
-    {setselectedElem(undefined); }
-    else
-    {
+      resetNodesEdges();
       setselectedElem(edge.data); 
-      setChoice(Choices.BJJTransitionSelection)
-    };
+      highlightEdges([edge.id])
+      setChoice(Choices.BJJTransitionSelection);
   }, [selectedElem]);
 
   const simulation = forceSimulation()
@@ -93,15 +115,19 @@ function App() {
         
         });
       };
-  
+      
+     
       window.requestAnimationFrame(tick);
+
       simulation.stop()
       return initialised;
-    }, [fitView, getEdges, getNodes, initialised, setNodes]);
+    }, [fitView, getEdges, initialised]);
   };
 
+ // useEffect(highlightNode, [highlightNode, selectedElem]);
   useLayoutedElements();
   //const onConnect = useCallback((params : Edge) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
+
 
   return (
     <div className="App">
@@ -121,7 +147,7 @@ function App() {
           </div>
        {<PanelOverlay selection={choice}
                       data={selectedElem}
-                      nullFunc={() => {setChoice(Choices.None)}}>children 
+                      nullFunc={() => {setChoice(Choices.None); resetNodesEdges();}}>children 
         </PanelOverlay>}
         </div>
 

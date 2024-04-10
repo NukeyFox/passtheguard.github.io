@@ -45,7 +45,7 @@ export type BJJPosition = {
     pos_type : BJJPositionType,
     valid_in_sports : Sports[], 
     reference : Reference[],
-    comments : string | null
+    comments : string | null,
 }
 
 
@@ -63,6 +63,7 @@ export type BJJTransition = {
     edge_no : number,
     valid_in_sports : Sports[],
     reference : Reference[],
-    comments : string | null
+    comments : string | null,
+
 
 }

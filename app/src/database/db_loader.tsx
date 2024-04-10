@@ -56,6 +56,7 @@ function createInitialNode(node_map : BJJPositionMap) : Node<BJJPosition>[]{
             data : value,
             connectable: false,
             type : "custom"
+   
             }
         )
     ));
