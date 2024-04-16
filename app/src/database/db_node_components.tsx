@@ -1,3 +1,5 @@
+import {Node} from "reactflow"
+
 export enum Sports {
     MMA = "MMA", 
     BJJ = "BJJ", 
@@ -53,8 +55,8 @@ export type BJJPosition = {
 export type BJJTransition = {
 
     name : string | null, 
-    from_pos : BJJPosition | undefined, 
-    to_pos : BJJPosition | undefined,
+    from_pos : Node<BJJPosition> | undefined, 
+    to_pos : Node<BJJPosition> | undefined,
     description : string,
     trans_type : BJJTransitionType,
     variations : string[],

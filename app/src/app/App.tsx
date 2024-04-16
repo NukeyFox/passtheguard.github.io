@@ -11,6 +11,7 @@ import FloatingEdge from './network/FloatingEdge';
 import CustomNode from './network/CustomNode';
 import SelectedNode from "./network/SelectedNode"
 import { BJJPosition, BJJTransition } from '../database/db_node_components';
+import { DepthFirst } from './functions/depthfirst';
 
 
 interface SimNode extends SimulationNodeDatum{
@@ -24,8 +25,23 @@ const nodeTypes = {
   selected : SelectedNode
 };
 
+function StartUp(){
+
+
+}
+
 function App() {
-  const data = GraphDB();
+ 
+
+  const data = useMemo(() => GraphDB(),[]);
+  const path = useMemo(()=>DepthFirst(data.node_map.get("Mount"), data.node_map.get("Closed Guard"),data.adjMap),[]);
+  useMemo(()=>{
+    for (let i = 0; i < 3; i ++)
+      console.log(path.next());
+
+  },[]);
+
+ 
   const [nodes, setNodes, onNodesChange] = useNodesState<BJJPosition>(data.initial_nodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState<BJJTransition>(data.initial_edges);
   const [choice, setChoice] = useState<Choices>(Choices.None)

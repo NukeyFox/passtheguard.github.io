@@ -39,7 +39,7 @@ function formatEdgeContent(pos : BJJTransition) : JSX.Element {
       <>
 
         <div className="content-title">{pos?.name}</div>
-      <p className='content-subtext' style={{textAlign:"center"}}> {pos?.from_pos?.label} → {pos?.to_pos?.label} </p>
+      <p className='content-subtext' style={{textAlign:"center"}}> {pos?.from_pos?.data.label} → {pos?.to_pos?.data.label} </p>
       <p className='content-subtext'>{pos?.description}</p>
       <p className='content-subtext'>
           <strong>Also known as:</strong> {pos?.aliases.join(", ")}</p>

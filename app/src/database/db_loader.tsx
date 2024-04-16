@@ -2,15 +2,14 @@ import {BJJPosition, BJJPositionType, BJJTransition, BJJTransitionType, Sports} 
 import { Node, Edge, MarkerType } from "reactflow"
 import graph from "./db.json"
 import "../app/network/nodestyle.css";
-type BJJPositionMap = Map<string, BJJPosition>;
+import { create } from "domain";
+type BJJPositionMap = Map<string, Node<BJJPosition>>;
+export type AdjacencyMap = Map<Node<BJJPosition>, Map<Node<BJJPosition>, Edge<BJJTransition>[]>>;
 
-function getNodes() : BJJPositionMap{
+function getNodes() : BJJPosition[]{
     var i = 0;
-    const node_map = new Map<string, BJJPosition>();
-    (graph.nodes).map((entry) => 
+    const nodes = (graph.nodes).map((entry) => 
         (
-            node_map.set(
-                entry.id, 
                 {
                     id_no : i++,
                     label : entry.id,
@@ -22,8 +21,8 @@ function getNodes() : BJJPositionMap{
                     reference : [],
                     comments :  entry.attr.comments}
                 )
-    ));
-    return node_map;
+    );
+    return nodes;
 }
 
 function getLinks(node_map : BJJPositionMap ) : BJJTransition[]{
@@ -47,20 +46,22 @@ function getLinks(node_map : BJJPositionMap ) : BJJTransition[]{
     return  links;
 }
 
-function createInitialNode(node_map : BJJPositionMap) : Node<BJJPosition>[]{
-    var node_list : Node<BJJPosition>[] = []; 
-    node_map.forEach((value, key, map) => (
-        node_list.push({
+function createInitialNode(node_map : BJJPosition[]) : [BJJPositionMap, Node<BJJPosition>[]]{
+    var map : BJJPositionMap = new Map<string, Node<BJJPosition>>();
+    var list : Node<BJJPosition>[] = [];
+    node_map.forEach((value, index, arr) => {
+        const node =  {
             id : value.id_no.toString(),
             position : {x : Math.random()*1000+50, y : Math.random()*1000+50},
             data : value,
             connectable: false,
             type : "custom"
-   
-            }
-        )
-    ));
-    return node_list;
+        };
+        map.set(value.label, node);
+        list.push(node);
+    }
+    );
+    return [map,list];
 }
 
 function createInitialEdge(edge_list : BJJTransition[], node_map : BJJPositionMap) : Edge<BJJTransition>[]{
@@ -68,8 +69,8 @@ function createInitialEdge(edge_list : BJJTransition[], node_map : BJJPositionMa
     edge_list.forEach((value, index, array) => (
         edge_list_rf.push({
             id : value.name || "",
-            source : node_map.get((value.from_pos?.label) || "")?.id_no.toString() || "",
-            target : node_map.get((value.to_pos?.label) || "")?.id_no.toString() || "",
+            source : node_map.get((value.from_pos?.data.label) || "")?.data.id_no.toString() || "",
+            target : node_map.get((value.to_pos?.data.label) || "")?.data.id_no.toString() || "",
             label : value.name,
             data : value,
             markerEnd: {
@@ -84,12 +85,42 @@ function createInitialEdge(edge_list : BJJTransition[], node_map : BJJPositionMa
     return  edge_list_rf;
 }
 
+function createAdjacencyMap(edge_list : Edge<BJJTransition>[]) : AdjacencyMap {
+    const adj_map = new Map<Node<BJJPosition>, Map<Node<BJJPosition>, Edge<BJJTransition>[]>>();
+    edge_list.forEach((edge, index, arr) => {
+        if( (edge.data !== undefined) && (edge.data.from_pos !== undefined)){
+            const src = edge.data.from_pos;
+            const tgt = edge.data.to_pos;
+
+            if (!adj_map.has(src)){
+                const map = new Map<Node<BJJPosition>,Edge<BJJTransition>[]>();
+                adj_map.set(src,map);
+            }
+            
+            const tgt_map = adj_map.get(src) as Map<Node<BJJPosition>,Edge<BJJTransition>[]>;
+            if (tgt !== undefined) {
+                    if (!tgt_map.has(tgt)){
+                    const e_list : Edge<BJJTransition>[] = [];
+                    tgt_map.set(tgt,e_list);
+                }
+                const out = tgt_map.get(tgt) as Edge<BJJTransition>[]
+                out.push(edge);
+            }      
+            }
+        }
+    )
+
+    return adj_map;
+
+}
+
 function GraphDB() {
-    const nodeMap = getNodes();
+    const posList = getNodes();
+    const [nodeMap, nodeList] = createInitialNode(posList);
     const edgeList = getLinks(nodeMap);
-    const initialNodes = createInitialNode(nodeMap);
     const initialEdges = createInitialEdge(edgeList, nodeMap);
+    const adjMap = createAdjacencyMap(initialEdges);
   
-    return {node_map : nodeMap, edge_list : edgeList, initial_nodes : initialNodes, initial_edges : initialEdges};
+    return {node_map : nodeMap, initial_nodes : nodeList, initial_edges : initialEdges, adjMap : adjMap};
 }
 export default GraphDB;
