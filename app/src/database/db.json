@@ -63,6 +63,42 @@
   ],
   "links": [
     {
+      "id": "test escape 2",
+      "attr": {
+        "aliases": [],
+        "description": "test 2",
+        "valid_in_sports": [],
+        "trans_type": "",
+        "reference": [],
+        "variations": [],
+        "diagram": [],
+        "comments": "",
+        "parallel_edges": 1,
+        "edge_no": 0
+      },
+      "source": "Closed Guard",
+      "target": "Closed Guard",
+      "key": "test escape 2"
+    },
+    {
+      "id": "slipping up",
+      "attr": {
+        "aliases": [],
+        "description": "slip",
+        "valid_in_sports": [],
+        "trans_type": "",
+        "reference": [],
+        "variations": [],
+        "diagram": [],
+        "comments": "",
+        "parallel_edges": 3,
+        "edge_no": 2
+      },
+      "source": "Closed Guard",
+      "target": "Half Guard",
+      "key": "slipping up"
+    },
+    {
       "id": "knee slide pass",
       "attr": {
         "aliases": [],
@@ -91,12 +127,30 @@
         "variations": [],
         "diagram": [],
         "comments": "",
-        "parallel_edges": 1,
+        "parallel_edges": 3,
         "edge_no": 0
       },
       "source": "Half Guard",
       "target": "Closed Guard",
       "key": "elbow knee escape \n(from half guard)"
+    },
+    {
+      "id": "test escape",
+      "attr": {
+        "aliases": [],
+        "description": "test",
+        "valid_in_sports": [],
+        "trans_type": "",
+        "reference": [],
+        "variations": [],
+        "diagram": [],
+        "comments": "",
+        "parallel_edges": 3,
+        "edge_no": 1
+      },
+      "source": "Half Guard",
+      "target": "Closed Guard",
+      "key": "test escape"
     },
     {
       "id": "elbow knee escape \n(from mount)",
