@@ -15,6 +15,20 @@
   }
 
   .panel-overlay .panel-content {
+    min-height : 95vh;
+    max-height: 95vh;
+    color: black; /* Applies to all text elements within the panel content */
+    overflow-y: auto;
+  }
+
+  .search-box { 
+    border: none;
+    font-size: 10px;
+    min-height: 50px;
+  }
+
+  .panel-main {
+    min-height : 95vh;
     max-height: 95vh;
     color: black; /* Applies to all text elements within the panel content */
     overflow-y: auto;

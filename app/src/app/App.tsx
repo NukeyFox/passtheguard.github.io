@@ -34,12 +34,6 @@ function App() {
  
 
   const data = useMemo(() => GraphDB(),[]);
-  const path = useMemo(()=>RecDepthFirst(data.node_map.get("Mount"), data.node_map.get("Closed Guard"),data.adjMap,new Set()),[]);
-  useMemo(()=>{
-    for (let i = 0; i < 10; i ++)
-      console.log(path.next());
-
-  },[]);
 
  
   const [nodes, setNodes, onNodesChange] = useNodesState<BJJPosition>(data.initial_nodes);

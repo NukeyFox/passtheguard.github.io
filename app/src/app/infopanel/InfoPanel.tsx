@@ -3,6 +3,7 @@ import './Infopanel.css';
 import { BJJPosition, BJJPositionType, BJJTransition, BJJTransitionType, Sports } from '../../database/db_node_components';
 import { Choices } from './infopanel_components';
 import ReferencePanel from './ReferencePanel';
+import SequenceSearch from './SequenceSearch';
 
 
 function formatPositionContent(pos : BJJPosition) : JSX.Element {
@@ -66,10 +67,10 @@ function formatEdgeContent(pos : BJJTransition) : JSX.Element {
 
 function mainPanel() {
   return (
-    <>
+    <div className='panel-main'>
       <p> Search: </p>
-      <p> Find Sequence: </p>
-    </>
+      <SequenceSearch/>
+    </div>
   )
 }
 

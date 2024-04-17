@@ -3,7 +3,7 @@ import { BJJPosition,  BJJTransition } from "../../database/db_node_components";
 import { AdjacencyMap } from "../../database/db_loader";
 
 export type Path = (Node<BJJPosition> | Edge<BJJTransition>)[]
-export type PathGenerator = Generator<(Node<BJJPosition> | Edge<BJJTransition>)[]> 
+export type PathGenerator = Generator<Path> 
 
 export function* RecDepthFirst(
     sourceNode : Node<BJJPosition> | undefined, 
