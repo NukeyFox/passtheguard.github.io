@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useCallback, useMemo} from 'react';
 import './App.css';
-import ReactFlow, { Node, Edge, useNodesState, useEdgesState, useReactFlow, useStore, ReactFlowProvider, addEdge, useOnSelectionChange } from 'reactflow'
+import ReactFlow, { Node as RFNode, Edge, useNodesState, useEdgesState, useReactFlow, useStore, ReactFlowProvider, addEdge, useOnSelectionChange } from 'reactflow'
 import GraphDB from "../database/db_loader";
 import { Choices } from './infopanel/infopanel_components';
 import PanelOverlay from "./infopanel/InfoPanel"
@@ -10,12 +10,12 @@ import 'reactflow/dist/style.css';
 import FloatingEdge from './network/FloatingEdge';
 import CustomNode from './network/CustomNode';
 import SelectedNode from "./network/SelectedNode"
-import { BJJPosition, BJJTransition } from '../database/db_node_components';
-import { RecDepthFirst } from './functions/depthfirst';
+import { BJJPosition, BJJPositionType, BJJTransition } from '../database/db_node_components';
+import { Path } from "./functions/depthfirst";
 
 
 interface SimNode extends SimulationNodeDatum{
-  data : Node<BJJPosition>
+  data : RFNode<BJJPosition>
 }
 const edgeTypes = {
   floating: FloatingEdge,
@@ -44,12 +44,13 @@ function App() {
 
 
   const [selectedElem, setselectedElem] = useState<BJJPosition|BJJTransition|undefined>(undefined);
+  const [searchPath, setSearchPath] = useState<Path>([]);
   const [adjustNodes, setAdjustNodes] = useState<boolean>(true);
 
-  const onNodeClick = useCallback((event: React.MouseEvent<Element>, node: Node<BJJPosition>) => {
+  const onNodeClick = useCallback((event: React.MouseEvent<Element>, node: RFNode<BJJPosition>) => {
       resetNodesEdges();
       setselectedElem(node.data); 
-      highlightNodes([node.id])
+      highlightNode(node)
       setChoice(Choices.BJJPositionSelection)}, [selectedElem]);
 
   const resetNodesEdges = (() => {
@@ -61,26 +62,36 @@ function App() {
         ({ ...e, style : {...e.style, stroke : "white"}})));
   });
 
-  const highlightNodes = ((nodesId : string[]) => (
+  const highlightNode = ((node : RFNode<BJJPosition>) => (
       setNodes((prevNodes) =>
         prevNodes.map((n) => 
-          (nodesId.some((x) => x === n.id) ?
-            { ...n, type : 'selected' } : 
-            { ...n, type : 'custom' })))
+          (n.id === node.id) ? { ...n, type : 'selected' } : n))
   ));
 
-  const highlightEdges = ((edgesId : string[]) => (
+  const highlightEdge = ((edge : Edge<BJJTransition>) => (
     setEdges((prevNodes) =>
       prevNodes.map((e) => 
-        (edgesId.some((x) => x === e.id) ?
-          { ...e, style : {...e.style, stroke : "red"}} : 
-          { ...e, style : {...e.style, stroke : "white"}})))
+        (edge.id === e.id ? { ...e, style : {...e.style, stroke : "red"}} : e)))
 ));
+
+  const highlightPath = (path : Path) => {
+    resetNodesEdges();
+    for (var elem of path){
+      if (elem.data !== undefined) {
+          if (elem.data.type == "BJJPosition"){
+          highlightNode(elem as RFNode<BJJPosition>);
+        } else {
+          highlightEdge(elem as Edge<BJJTransition>);
+        }
+    }
+    }
+  };
+
 
   const onEdgeClick = useCallback((event: React.MouseEvent<Element>, edge: Edge<BJJTransition>) => {
       resetNodesEdges();
       setselectedElem(edge.data); 
-      highlightEdges([edge.id])
+      highlightEdge(edge)
       setChoice(Choices.BJJTransitionSelection);
   }, [selectedElem]);
 
@@ -157,6 +168,7 @@ function App() {
           </div>
        {<PanelOverlay selection={choice}
                       data={selectedElem}
+                      pathHighlight={highlightPath}
                       nullFunc={() => {setChoice(Choices.None); resetNodesEdges();}}>children 
         </PanelOverlay>}
         </div>

@@ -35,7 +35,7 @@ export enum BJJTransitionType {
 export type Reference = {
     resource_type : ResourceType,
     resource_name : string | null,
-    resource : string
+    resource : string,
 }
 
 export type BJJPosition = {
@@ -48,6 +48,7 @@ export type BJJPosition = {
     valid_in_sports : Sports[], 
     reference : Reference[],
     comments : string | null,
+    type : string
 }
 
 
@@ -66,6 +67,7 @@ export type BJJTransition = {
     valid_in_sports : Sports[],
     reference : Reference[],
     comments : string | null,
+    type : string,
 
 
 }

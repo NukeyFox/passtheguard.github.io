@@ -4,6 +4,7 @@ import { BJJPosition, BJJPositionType, BJJTransition, BJJTransitionType, Sports 
 import { Choices } from './infopanel_components';
 import ReferencePanel from './ReferencePanel';
 import SequenceSearch from './SequenceSearch';
+import { Path } from '../functions/depthfirst';
 
 
 function formatPositionContent(pos : BJJPosition) : JSX.Element {
@@ -65,11 +66,11 @@ function formatEdgeContent(pos : BJJTransition) : JSX.Element {
   );
 }
 
-function mainPanel() {
+function mainPanel(pathHighlight : (path : Path) => void) {
   return (
     <div className='panel-main'>
       <p> Search: </p>
-      <SequenceSearch/>
+      <SequenceSearch pathHighlight = {pathHighlight}></SequenceSearch>
     </div>
   )
 }
@@ -78,16 +79,17 @@ interface PanelOverlayProps {
     selection : Choices | undefined,
     data : BJJPosition | BJJTransition | undefined,
     nullFunc : () => void,
+    pathHighlight : (path : Path) => void,
     children: React.ReactNode; // Content to be displayed inside the panel
   }
 
 
 
 
-const PanelOverlay: React.FC<PanelOverlayProps> = ({selection, data, nullFunc}) => {
+const PanelOverlay: React.FC<PanelOverlayProps> = ({selection, data, nullFunc, pathHighlight}) => {
 
   const overlayRef = useRef<HTMLDivElement>(null);
-  const [elem, setElem] = useState<JSX.Element>(mainPanel())
+  const [elem, setElem] = useState<JSX.Element>(mainPanel(pathHighlight))
 
   const renderPanel = useCallback((
           selection : Choices | undefined,
@@ -106,7 +108,7 @@ const PanelOverlay: React.FC<PanelOverlayProps> = ({selection, data, nullFunc}) 
               }
             default:
               {
-                setElem(mainPanel())
+                setElem(mainPanel(pathHighlight))
               }
             }
           }

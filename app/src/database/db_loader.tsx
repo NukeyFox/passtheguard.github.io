@@ -19,7 +19,8 @@ function getNodes() : BJJPosition[]{
                     variations : entry.attr.variations,
                     valid_in_sports : entry.attr?.valid_in_sports.map((sport) => Sports[sport as keyof typeof Sports]),
                     reference : [],
-                    comments :  entry.attr.comments}
+                    comments :  entry.attr.comments,
+                    type:"BJJPosition"}
                 )
     );
     return nodes;
@@ -39,7 +40,8 @@ function getLinks(node_map : BJJPositionMap ) : BJJTransition[]{
         diagram : null,
         comments : null,
         parallel_edges : entry.attr.parallel_edges,
-        edge_no : entry.attr.edge_no
+        edge_no : entry.attr.edge_no,
+        type : "BJJTransition"
         }
     ));
 

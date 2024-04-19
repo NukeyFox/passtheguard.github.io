@@ -1,34 +1,71 @@
-import { useState } from "react";
-import Multiselect from 'multiselect-react-dropdown';
+import { useCallback, useMemo, useState } from "react";
+import Select, { ActionMeta } from 'react-select';
 import GraphDB from "../../database/db_loader";
-import { Path, RecDepthFirst } from "../functions/depthfirst";
+import { DepthFirst, Path} from "../functions/depthfirst";
 
-function SequenceSearch() {
+interface SequenceSearchProp {
+    pathHighlight : (path : Path) => void;
+}
+
+interface OptionSelection{
+    value : number,
+    label : string,
+}
+
+function* count() : Generator<number,any,any> {
+    var n = 0;
+    while(true) {
+        yield n;
+        n++;
+    }
+}
+
+function comp(o1 : OptionSelection, o2 : OptionSelection) : number{
+    if (o1.label > o2.label) return 1; 
+    if (o1.label < o2.label) return -1;
+    return 0;
+}
+
+function SequenceSearch({pathHighlight} : SequenceSearchProp) {
     const data = GraphDB()
     const nodes = Array.from(data.node_map.keys());
-    console.log(nodes);
-
-    const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
-    const options = nodes.map((val) => ({"name" : val}));
-  
-    const handleChange = (selectedList : string[], selectedItem : string) => {
-     
-      setSelectedOptions([...selectedList, selectedItem]);
+    const [options, setOptions] = useState<OptionSelection[]>([]);
+    const [selectedPath, setSelectedPath] = useState<string[]>([]);
+    const [selectedOptions, setSelectedOptions] = useState<readonly OptionSelection[]>([]);
+    const counter = useMemo(() => count(),[]);
+    useMemo(() => setOptions(nodes.map((x) => ({value : counter.next().value, label : x})).sort(comp)),[])
+    
+    const onSelect = (selectedList : readonly OptionSelection[], action : ActionMeta<OptionSelection>) => {
+    if (action.action === "select-option" && action.option !== undefined)
+       { 
+        setSelectedPath(selectedList.map((x)=>x.label));
+        setSelectedOptions(selectedList);
+        const opt = [...options, {value : counter.next().value, label : action.option.label}].sort(comp);
+        setOptions(opt);
+        } else 
+    if (action.action === "remove-value") {
+        setSelectedPath(selectedList.map((x)=>x.label));
+        setSelectedOptions(selectedList);
+        const opt = [...options.filter((x) => action.removedValue.label != x.label), 
+                        {value : counter.next().value, label : action.removedValue.label}
+        ].sort(comp);
+        setOptions(opt);
+        }
     };
+
 
     const onSearchClick = (()=>{
         var path : Path = [];
         const n = selectedOptions.length;
-        console.log(n);
         if (n >= 2){
             for (var i = 0; i < n-1; i++){
-                var source = data.node_map.get(selectedOptions[i]);
-                var target = data.node_map.get(selectedOptions[i+1]);
-                var r = RecDepthFirst(source,target,data.adjMap,new Set());
+                var source = data.node_map.get(selectedPath[i]);
+                var target = data.node_map.get(selectedPath[i+1]);
+                var r = DepthFirst(source,target,data.adjMap,new Set());
                 const p = r.next();
-                path.concat(p.value);
+                path = path.concat(p.value);
             }
-            console.log(path);
+            pathHighlight(path);
         }
     }
         
@@ -38,12 +75,11 @@ function SequenceSearch() {
     return (
         <div>
         <p>Sequence Search: </p>
-        <Multiselect
-        options={options} // Options to display in the dropdown
-        //selectedValues={selectedOptions} // Preselected value to persist in dropdown
-        onSelect={handleChange} // Function will trigger on select event
-        //onRemove={} // Function will trigger on remove event
-        displayValue="name" // Property name to display in the dropdown options
+        <Select
+            isMulti // Enables multi-selection
+            options={options}
+            onChange={onSelect}
+            value={selectedOptions}
         />
         <button onClick={onSearchClick}>Search</button>
         </div>
