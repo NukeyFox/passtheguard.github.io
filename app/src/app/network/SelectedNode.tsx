@@ -7,8 +7,8 @@ export default function CustomNode(props : NodeProps<BJJPosition>) {
 
   return (
     <div className="selected-node">
-      <Handle id="undefined" type="source" position={Position.Top} className='handle-style'></Handle>
-      <Handle id="undefined" type="target" position={Position.Bottom} className='handle-style'></Handle>
+      <Handle id="src" type="source" position={props.sourcePosition || Position.Bottom} className='handle-style'></Handle>
+      <Handle id="tgt" type="target" position={props.targetPosition || Position.Bottom} className='handle-style'></Handle>
         <label>{label}</label>
       </div>
     

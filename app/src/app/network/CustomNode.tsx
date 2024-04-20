@@ -1,4 +1,4 @@
-import { Node, Handle, Position, ReactFlowState, useStore, NodeProps } from 'reactflow';
+import { Handle, Position, NodeProps } from 'reactflow';
 import "./nodestyle.css"
 import { BJJPosition } from '../../database/db_node_components';
 export default function CustomNode(props : NodeProps<BJJPosition>) {
@@ -7,8 +7,8 @@ export default function CustomNode(props : NodeProps<BJJPosition>) {
 
   return (
     <div className="custom-node">
-      <Handle id="undefined" type="source" position={Position.Top} className='handle-style'></Handle>
-      <Handle id="undefined" type="target" position={Position.Bottom} className='handle-style'></Handle>
+      <Handle id="src" type="source" position={props.sourcePosition || Position.Top} className='handle-style'></Handle>
+      <Handle id="tgt" type="target" position={props.sourcePosition || Position.Bottom} className='handle-style'></Handle>
         <label>{label}</label>
       </div>
     

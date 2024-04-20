@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import Select, { ActionMeta } from 'react-select';
 import GraphDB from "../../database/db_loader";
 import { DepthFirst, Path} from "../functions/depthfirst";
@@ -33,6 +33,7 @@ function SequenceSearch({pathHighlight} : SequenceSearchProp) {
     const [selectedPath, setSelectedPath] = useState<string[]>([]);
     const [selectedOptions, setSelectedOptions] = useState<readonly OptionSelection[]>([]);
     const counter = useMemo(() => count(),[]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useMemo(() => setOptions(nodes.map((x) => ({value : counter.next().value, label : x})).sort(comp)),[])
     
     const onSelect = (selectedList : readonly OptionSelection[], action : ActionMeta<OptionSelection>) => {
@@ -46,7 +47,7 @@ function SequenceSearch({pathHighlight} : SequenceSearchProp) {
     if (action.action === "remove-value") {
         setSelectedPath(selectedList.map((x)=>x.label));
         setSelectedOptions(selectedList);
-        const opt = [...options.filter((x) => action.removedValue.label != x.label), 
+        const opt = [...options.filter((x) => action.removedValue.label !== x.label), 
                         {value : counter.next().value, label : action.removedValue.label}
         ].sort(comp);
         setOptions(opt);
@@ -61,7 +62,7 @@ function SequenceSearch({pathHighlight} : SequenceSearchProp) {
             for (var i = 0; i < n-1; i++){
                 var source = data.node_map.get(selectedPath[i]);
                 var target = data.node_map.get(selectedPath[i+1]);
-                var r = DepthFirst(source,target,data.adjMap,new Set());
+                var r = DepthFirst(source,target,data.adjMap);
                 const p = r.next();
                 path = path.concat(p.value);
             }

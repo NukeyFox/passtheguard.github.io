@@ -18,40 +18,42 @@ export default function CustomEdge({
   sourceY,
   targetX,
   targetY,
-  
-  style = {},
+  sourcePosition,
+  targetPosition,
+  sourceHandleId,
+  targetHandleId,
+  style ,
   markerEnd,
   label,
   data
 }: EdgeProps<BJJTransition>) {
-  const { setEdges, getNode } = useReactFlow<BJJPosition>();
+  const { getNode } = useReactFlow<BJJPosition>();
 
   const sourceNode = getNode(source) ;
   const targetNode = getNode(target) ;
-
-  const { sx, sy, tx, ty, sourcePos, targetPos } = getEdgeParams(sourceNode, targetNode) ;
   
-  const offset_width = 500;
-  const offset_pos = offset_width * ((data?.edge_no || 0)+1 ) / ((data?.parallel_edges || 0)+1) - offset_width/2;
+  const control_width = 500 ;
+  const offset_percent = ((data?.edge_no || 0)+1 ) / ((data?.parallel_edges || 0)+1) - 1/2;
+  const control_pos =  control_width * offset_percent; 
+  const { sx, sy, tx, ty, sourcePos, targetPos } = getEdgeParams(sourceNode, targetNode, offset_percent) ;
+
 
   const [edgePath, labelX, labelY] = ownBezierPath({
-      sourceX : sx || sourceX,
+      selfLoop : sourceNode === targetNode,
+      sourceX : sx || sourceX ,
       sourceY : sy || sourceY,
-      //sourcePosition : sourcePos || sourcePosition,
-      targetX :tx || targetX,
+      sourcePosition : sourcePos || sourcePosition,
+      targetX : tx || targetX,
       targetY : ty || targetY,
-      //targetPosition : targetPos || targetPosition,
-      controlX : ((sx || sourceX) + (tx || targetX))/2 + offset_pos,
-      controlY : ((sy || sourceY) + (ty || targetY))/2 + offset_pos
+      targetPosition : targetPos || targetPosition,
+      controlX :  control_pos,
+      controlY :  control_pos
     });
 
-  const onEdgeClick = () => {
-    //Make it so that clicking the edge  label opens up the panel 
-  };
 
   return (
     <>
-      <BaseEdge path={edgePath} markerEnd={markerEnd} style={style} />
+      <BaseEdge path={edgePath} markerEnd={markerEnd} style={style}  />
       <EdgeLabelRenderer>
         <div
           style={{
@@ -59,11 +61,12 @@ export default function CustomEdge({
             transform: `translate(-50%, -50%) translate(${labelX}px,${labelY}px)`,
             fontSize: 10,
             pointerEvents: 'all',
-            background: '#bad0de',
+            background: style?.color ||'#bad0de',
             padding: 5,
             borderRadius: 2,
             fontWeight: 500,
-            color : "#000000"
+            color : "#000000",
+            zIndex : style?.zIndex
           }}
           className="nopan"
         >

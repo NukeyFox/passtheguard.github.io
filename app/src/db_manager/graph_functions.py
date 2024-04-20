@@ -34,7 +34,9 @@ class GraphManager(MultiDiGraph):
         filter_target = lambda tgt : lambda x : x[1] == tgt
         outgoing = filter(filter_target(target), self.edges(source, data=False, keys=True))
         incoming = filter(filter_target(source), self.edges(target, data=False, keys=True))
-        return list(outgoing) + list(incoming)
+        res = list(set(outgoing).union(set(incoming)))
+        print(f"Search from {source} to {target}: {res}")
+        return res
 
     def add_node_safe(self, 
                     name : str,
@@ -127,6 +129,7 @@ if __name__ == "__main__":
     g.add_link_safe("kipping escape", "Mount", "Half Guard", description= "hip hip horray")
     g.add_link_safe("test escape", "Half Guard", "Closed Guard", description= "test")
     g.add_link_safe("test escape 2", "Closed Guard", "Closed Guard", description= "test 2")
+    g.add_link_safe("test escape closed guard", "Closed Guard", "Closed Guard", description= "test 5")
     g.add_link_safe("slipping up", "Closed Guard", "Half Guard", description= "slip")
     
     g.save_graph()

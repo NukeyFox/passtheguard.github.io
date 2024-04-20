@@ -1,8 +1,7 @@
-import React, {useState, useEffect, useCallback, useMemo} from 'react';
+import React, {useState, useCallback, useMemo, useEffect} from 'react';
 import './App.css';
-import ReactFlow, { Node as RFNode, Edge, useNodesState, useEdgesState, useReactFlow, useStore, ReactFlowProvider, addEdge, useOnSelectionChange } from 'reactflow'
+import ReactFlow, { Node as RFNode, Edge, useNodesState, useEdgesState, useReactFlow, MarkerType, useStore, ReactFlowProvider } from 'reactflow'
 import GraphDB from "../database/db_loader";
-import { Choices } from './infopanel/infopanel_components';
 import PanelOverlay from "./infopanel/InfoPanel"
 import { forceSimulation, forceLink, forceManyBody, forceX, forceY, SimulationNodeDatum, SimulationLinkDatum } from 'd3-force';
 import collide from './collide';
@@ -10,7 +9,7 @@ import 'reactflow/dist/style.css';
 import FloatingEdge from './network/FloatingEdge';
 import CustomNode from './network/CustomNode';
 import SelectedNode from "./network/SelectedNode"
-import { BJJPosition, BJJPositionType, BJJTransition } from '../database/db_node_components';
+import { BJJPosition,  BJJTransition } from '../database/db_node_components';
 import { Path } from "./functions/depthfirst";
 
 
@@ -25,10 +24,6 @@ const nodeTypes = {
   selected : SelectedNode
 };
 
-function StartUp(){
-
-
-}
 
 function App() {
  
@@ -38,47 +33,39 @@ function App() {
  
   const [nodes, setNodes, onNodesChange] = useNodesState<BJJPosition>(data.initial_nodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState<BJJTransition>(data.initial_edges);
-  const [choice, setChoice] = useState<Choices>(Choices.None)
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [selectedElem, setselectedElem] = useState<RFNode<BJJPosition>|Edge<BJJTransition>|undefined>(undefined);
 
 
-  const [selectedElem, setselectedElem] = useState<BJJPosition|BJJTransition|undefined>(undefined);
-  const [searchPath, setSearchPath] = useState<Path>([]);
-  const [adjustNodes, setAdjustNodes] = useState<boolean>(true);
-
-  const onNodeClick = useCallback((event: React.MouseEvent<Element>, node: RFNode<BJJPosition>) => {
-      resetNodesEdges();
-      setselectedElem(node.data); 
-      highlightNode(node)
-      setChoice(Choices.BJJPositionSelection)}, [selectedElem]);
-
-  const resetNodesEdges = (() => {
+  const resetNodesEdges = (useCallback(() => {
     setNodes((prevNodes) =>
       prevNodes.map((n) => 
         ({ ...n, type : 'custom' })));
     setEdges((prevEdge) =>
       prevEdge.map((e) => 
-        ({ ...e, style : {...e.style, stroke : "white"}})));
-  });
+        ({ ...e, markerEnd : { type : MarkerType.ArrowClosed, color : "white"}, style : {...e.style,color : undefined,  zIndex : 100, stroke : "white"}})));
+  },[setEdges, setNodes]));
 
-  const highlightNode = ((node : RFNode<BJJPosition>) => (
+  const highlightNode = (useCallback((node : RFNode<BJJPosition>) => (
       setNodes((prevNodes) =>
         prevNodes.map((n) => 
           (n.id === node.id) ? { ...n, type : 'selected' } : n))
-  ));
+  ),[setNodes]));
 
-  const highlightEdge = ((edge : Edge<BJJTransition>) => (
+  const highlightEdge = (useCallback((edge : Edge<BJJTransition>) => (
     setEdges((prevNodes) =>
       prevNodes.map((e) => 
-        (edge.id === e.id ? { ...e, style : {...e.style, stroke : "red"}} : e)))
-));
+        (edge.id === e.id ? { ...e, markerEnd : { type : MarkerType.ArrowClosed, color : "red"} ,style : {...e.style, color : "#ffa6a6", zIndex: 200, stroke : "red"}} : e)))
+),[setEdges]));
+
+const onNodeClick = useCallback((event: React.MouseEvent<Element>, node: RFNode<BJJPosition>) => {
+  setselectedElem(node); }, []);
 
   const highlightPath = (path : Path) => {
     resetNodesEdges();
     for (var elem of path){
       if (elem.data !== undefined) {
-          if (elem.data.type == "BJJPosition"){
+          if (elem.data.type === "BJJPosition"){
           highlightNode(elem as RFNode<BJJPosition>);
         } else {
           highlightEdge(elem as Edge<BJJTransition>);
@@ -87,13 +74,19 @@ function App() {
     }
   };
 
+  const highlightOnSelected = useCallback((selectedElem: RFNode<BJJPosition>|Edge<BJJTransition>|undefined) => {
+    if (selectedElem === undefined) {resetNodesEdges(); return};
+    if (selectedElem.data !== undefined){
+        if (selectedElem.data.type === "BJJPosition"){
+          resetNodesEdges(); 
+          highlightNode(selectedElem as RFNode<BJJPosition>);
+        }
+        else {resetNodesEdges(); highlightEdge(selectedElem as Edge<BJJTransition>)}
+    }
+  },[highlightEdge, highlightNode, resetNodesEdges])
 
-  const onEdgeClick = useCallback((event: React.MouseEvent<Element>, edge: Edge<BJJTransition>) => {
-      resetNodesEdges();
-      setselectedElem(edge.data); 
-      highlightEdge(edge)
-      setChoice(Choices.BJJTransitionSelection);
-  }, [selectedElem]);
+
+  const onEdgeClick = useCallback((event: React.MouseEvent<Element>, edge: Edge<BJJTransition>) => {setselectedElem(edge); }, []);
 
   const simulation = forceSimulation()
       .force('charge', forceManyBody().strength(-2000))
@@ -119,8 +112,8 @@ function App() {
         'link',
         forceLink(edges)
           .id((d) => d.index || 0)
-          .strength(0.05)
-          .distance(350)
+          .strength(1)
+          .distance(500)
       );
   
       // The tick function is called every animation frame while the simulation is
@@ -142,13 +135,13 @@ function App() {
 
       simulation.stop()
       return initialised;
-    }, [fitView, getEdges, initialised]);
+    }, [fitView, getEdges, getNodes, initialised, setNodes]);
   };
 
  // useEffect(highlightNode, [highlightNode, selectedElem]);
   useLayoutedElements();
   //const onConnect = useCallback((params : Edge) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
-
+  useEffect(() => highlightOnSelected(selectedElem), [highlightOnSelected, selectedElem])
 
   return (
     <div className="App">
@@ -163,19 +156,21 @@ function App() {
               fitView
               edgeTypes={edgeTypes}
               nodeTypes={nodeTypes}
-              style={{backgroundColor:"#000000"}}
+              style={{backgroundColor:"#3c4052"}}
             />
           </div>
-       {<PanelOverlay selection={choice}
-                      data={selectedElem}
+       {<PanelOverlay 
+                      elem={selectedElem}
+                      selectionCallback={setselectedElem}
                       pathHighlight={highlightPath}
-                      nullFunc={() => {setChoice(Choices.None); resetNodesEdges();}}>children 
+                      nullFunc={() => {setselectedElem(undefined); resetNodesEdges();}}>children 
         </PanelOverlay>}
         </div>
 
   );
 }
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default function () {
   return (
     <ReactFlowProvider>

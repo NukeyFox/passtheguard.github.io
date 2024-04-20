@@ -1,8 +1,8 @@
 .custom-node {
   height: 30px;
-  border: 4px solid #eee;
-  padding: 5px;
-  border-radius: 5px;
+  border: 3px solid #616161;
+  padding: 4px;
+  border-radius: 3px;
   background: white;
   z-index: 100;
   text-align: center;
@@ -13,17 +13,17 @@
 
 .custom-node label {
   display: block;
-  color: #777;
+  color: #3f3e3e;
   font-size: 12px;
   
 }
 
 .selected-node {
   height: 30px;
-  border: 4px solid #6e1717;
-  padding: 5px;
-  border-radius: 5px;
-  background: rgb(248, 234, 234);
+  border: 3px solid #e62a2a;
+  padding: 4px;
+  border-radius: 3px;
+  background: rgb(255, 182, 182);
   z-index: 100;
   text-align: center;
   line-height: 30px;
@@ -34,7 +34,7 @@
 
 .selected-node label {
   display: block;
-  color: #777;
+  color: #300b0b;
   font-size: 12px;
   
 }

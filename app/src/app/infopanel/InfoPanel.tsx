@@ -1,13 +1,14 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback, Dispatch, SetStateAction } from 'react';
 import './Infopanel.css';
-import { BJJPosition, BJJPositionType, BJJTransition, BJJTransitionType, Sports } from '../../database/db_node_components';
-import { Choices } from './infopanel_components';
+import { BJJPosition, BJJPositionType, BJJTransition, BJJTransitionType } from '../../database/db_node_components';
 import ReferencePanel from './ReferencePanel';
 import SequenceSearch from './SequenceSearch';
 import { Path } from '../functions/depthfirst';
+import SearchBox from './SearchBox';
+import {Node, Edge} from "reactflow"
 
-
-function formatPositionContent(pos : BJJPosition) : JSX.Element {
+function formatPositionContent(node : Node<BJJPosition>) : JSX.Element {
+  const pos = node.data;
   return (
       <>
         <div className="content-title">{pos?.label}</div>
@@ -36,49 +37,52 @@ function formatPositionContent(pos : BJJPosition) : JSX.Element {
   );
 }
 
-function formatEdgeContent(pos : BJJTransition) : JSX.Element {
-  return (
-      <>
+function formatEdgeContent(edge : Edge<BJJTransition>) : JSX.Element {
+  const pos = edge.data;
+  if (pos !== undefined)
+    return (
+        <>
 
-        <div className="content-title">{pos?.name}</div>
-      <p className='content-subtext' style={{textAlign:"center"}}> {pos?.from_pos?.data.label} → {pos?.to_pos?.data.label} </p>
-      <p className='content-subtext'>{pos?.description}</p>
-      <p className='content-subtext'>
-          <strong>Also known as:</strong> {pos?.aliases.join(", ")}</p>
+          <div className="content-title">{pos?.name}</div>
+        <p className='content-subtext' style={{textAlign:"center"}}> {pos?.from_pos?.data.label} → {pos?.to_pos?.data.label} </p>
+        <p className='content-subtext'>{pos?.description}</p>
+        <p className='content-subtext'>
+            <strong>Also known as:</strong> {pos?.aliases.join(", ")}</p>
 
-      <p className='content-subtext'>
-          <strong>Move Type:</strong> {BJJTransitionType[pos?.trans_type] as string}</p>
+        <p className='content-subtext'>
+            <strong>Move Type:</strong> {BJJTransitionType[pos.trans_type] as string}</p>
 
-      <p className='content-subtext'>
-          { (pos)  
-           ? <><strong>Valid in: </strong> {pos.valid_in_sports.join(", ")}</> 
-           : <>Not valid in any sport</>}
-          {pos?.valid_in_sports}</p>
+        <p className='content-subtext'>
+            { (pos)  
+            ? <><strong>Valid in: </strong> {pos.valid_in_sports.join(", ")}</> 
+            : <>Not valid in any sport</>}
+            {pos?.valid_in_sports}</p>
+        
+
+        
+        <p className='content-subtext'>
+            <strong>Variations: </strong> {pos.variations}</p>
       
-
-      
-      <p className='content-subtext'>
-          <strong>Variations: </strong> {pos.variations}</p>
-     
-      <ReferencePanel title='References' content={pos?.reference}/>
-      <p className='content-subtext'>{pos.comments}</p>
-      </>
-  );
+        <ReferencePanel title='References' content={pos?.reference}/>
+        <p className='content-subtext'>{pos.comments}</p>
+        </>
+    );
+  else {return <>No Move Found!</>}
 }
 
-function mainPanel(pathHighlight : (path : Path) => void) {
+function mainPanel(selectionCallback : any, pathHighlight : (path : Path) => void) {
   return (
     <div className='panel-main'>
-      <p> Search: </p>
+      <SearchBox selectionCallback={selectionCallback}></SearchBox>
       <SequenceSearch pathHighlight = {pathHighlight}></SequenceSearch>
     </div>
   )
 }
 
 interface PanelOverlayProps {
-    selection : Choices | undefined,
-    data : BJJPosition | BJJTransition | undefined,
+    elem : Node<BJJPosition> | Edge<BJJTransition> | undefined,
     nullFunc : () => void,
+    selectionCallback : Dispatch<SetStateAction<Node<BJJPosition> | Edge<BJJTransition> | undefined>>,
     pathHighlight : (path : Path) => void,
     children: React.ReactNode; // Content to be displayed inside the panel
   }
@@ -86,35 +90,31 @@ interface PanelOverlayProps {
 
 
 
-const PanelOverlay: React.FC<PanelOverlayProps> = ({selection, data, nullFunc, pathHighlight}) => {
+const PanelOverlay: React.FC<PanelOverlayProps> = ({elem, nullFunc, selectionCallback, pathHighlight}) => {
 
   const overlayRef = useRef<HTMLDivElement>(null);
-  const [elem, setElem] = useState<JSX.Element>(mainPanel(pathHighlight))
+  const [panel, setPanel] = useState<JSX.Element>(mainPanel(selectionCallback, pathHighlight))
 
   const renderPanel = useCallback((
-          selection : Choices | undefined,
-          data : BJJPosition | BJJTransition | undefined) =>{
-        if (data !== undefined){
-          switch(selection){
-            case Choices.BJJPositionSelection:
+          elem : Node<BJJPosition> | Edge<BJJTransition> | undefined) =>{
+            
+          switch(elem?.data?.type){
+            case "BJJPosition":
               {
-              setElem(formatPositionContent(data as BJJPosition));
+              setPanel(formatPositionContent(elem as Node<BJJPosition>));
               break;
             }
-            case Choices.BJJTransitionSelection:
+            case "BJJTransition":
               {
-                setElem(formatEdgeContent(data as BJJTransition));
+                setPanel(formatEdgeContent(elem as Edge<BJJTransition>));
                 break;
               }
-            default:
-              {
-                setElem(mainPanel(pathHighlight))
-              }
-            }
+              default: 
+              setPanel(mainPanel(selectionCallback, pathHighlight))
           }
-      },[])
+      },[pathHighlight, selectionCallback])
 
-      useEffect(() => {renderPanel(selection,data);},[renderPanel, data, selection]);
+      useEffect(() => {renderPanel(elem);},[renderPanel, elem]);
       
 
   return (
@@ -125,10 +125,10 @@ const PanelOverlay: React.FC<PanelOverlayProps> = ({selection, data, nullFunc, p
         className={`panel-overlay`}
       >
         <div className="panel-content">
-        {selection !== Choices.None && <button className="close-button" onClick={nullFunc}>
+        {elem && <button className="close-button" onClick={nullFunc}>
             <span>&#10006;</span> {/* Unicode character for "X" */}
         </button>}
-          {elem}
+          {panel}
         </div>
       </div>)) 
 

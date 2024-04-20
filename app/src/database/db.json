@@ -73,12 +73,30 @@
         "variations": [],
         "diagram": [],
         "comments": "",
-        "parallel_edges": 1,
+        "parallel_edges": 2,
         "edge_no": 0
       },
       "source": "Closed Guard",
       "target": "Closed Guard",
       "key": "test escape 2"
+    },
+    {
+      "id": "test escape closed guard",
+      "attr": {
+        "aliases": [],
+        "description": "test 5",
+        "valid_in_sports": [],
+        "trans_type": "",
+        "reference": [],
+        "variations": [],
+        "diagram": [],
+        "comments": "",
+        "parallel_edges": 2,
+        "edge_no": 1
+      },
+      "source": "Closed Guard",
+      "target": "Closed Guard",
+      "key": "test escape closed guard"
     },
     {
       "id": "slipping up",

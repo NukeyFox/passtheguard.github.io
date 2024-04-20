@@ -2,7 +2,7 @@ import {BJJPosition, BJJPositionType, BJJTransition, BJJTransitionType, Sports} 
 import { Node, Edge, MarkerType } from "reactflow"
 import graph from "./db.json"
 import "../app/network/nodestyle.css";
-import { create } from "domain";
+
 type BJJPositionMap = Map<string, Node<BJJPosition>>;
 export type AdjacencyMap = Map<Node<BJJPosition>, Map<Node<BJJPosition>, Edge<BJJTransition>[]>>;
 
@@ -75,10 +75,13 @@ function createInitialEdge(edge_list : BJJTransition[], node_map : BJJPositionMa
             target : node_map.get((value.to_pos?.data.label) || "")?.data.id_no.toString() || "",
             label : value.name,
             data : value,
+            sourceHandle : "src",
+            targetHandle : "tgt",
             markerEnd: {
                 type: MarkerType.ArrowClosed,
                 width: 20,
                 height: 20,
+                color : "white"
               },
               type : "floating"
         })
