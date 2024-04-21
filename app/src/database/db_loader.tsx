@@ -1,4 +1,4 @@
-import {BJJPosition, BJJPositionType, BJJTransition, BJJTransitionType, ResourceType, Reference, Sports, StringToSport} from "./db_node_components"
+import {BJJPosition, BJJPositionType, BJJTransition, BJJTransitionType, ResourceType, Reference, Sports, StringToSport, Players} from "./db_node_components"
 import { Node, Edge, MarkerType } from "reactflow"
 import graph from "./db.json"
 import "../app/network/nodestyle.css";
@@ -40,6 +40,7 @@ function getLinks(node_map : BJJPositionMap ) : BJJTransition[]{
         variations : entry.attr.variations,
         aliases : entry.attr.aliases,
         valid_in_sports : entry.attr?.valid_in_sports.map(StringToSport),
+        initiatedBy : Players[(entry.attr.initiatedBy || "None") as keyof typeof Players],
         reference : entry.attr.reference.map(formatRef),
         comments : entry.attr.comments,
         parallel_edges : entry.attr.parallel_edges,

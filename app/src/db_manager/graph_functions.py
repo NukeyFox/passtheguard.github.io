@@ -46,6 +46,7 @@ class GraphManager(MultiDiGraph):
                     variations : list[str] = [],
                     valid_in_sports : list[str] = [],
                     references : list[dict[str,str]] = [],
+
                     diagram = [], 
                     comments : str = ""  ):
         self.add_node(name, 
@@ -76,6 +77,7 @@ class GraphManager(MultiDiGraph):
                     aliases : list[str] = [],
                     valid_in_sports : list[str] = [],
                     reference : list[str] = [],
+                    initiatedBy : str = "None",
                     diagram = [], 
                     comments : str = ""  ):
         para_edges = self.get_parallel_edges(from_pos,to_pos)
@@ -93,6 +95,7 @@ class GraphManager(MultiDiGraph):
                         "trans_type" : trans_type,
                         "reference" : reference,
                         "variations" : variations,
+                        "initiatedBy" : initiatedBy,
                         "diagram" : diagram, 
                         "comments" :comments,
                         "parallel_edges" : p+1,

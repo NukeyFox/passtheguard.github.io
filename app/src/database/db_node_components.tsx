@@ -75,6 +75,12 @@ export type BJJPosition = {
     type : string
 }
 
+export enum Players {
+    Top, 
+    Bottom, 
+    Any, 
+    None
+}
 
 
 export type BJJTransition = {
@@ -91,6 +97,7 @@ export type BJJTransition = {
     valid_in_sports : Sports[],
     reference : Reference[],
     comments : string | null,
+    initiatedBy : Players,
     type : string,
 
 

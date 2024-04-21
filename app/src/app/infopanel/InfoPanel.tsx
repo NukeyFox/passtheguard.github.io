@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback, Dispatch, SetStateAction } from 'react';
 import './Infopanel.css';
-import { BJJPosition, BJJPositionType, BJJTransition, BJJTransitionType, Sports, SportsToString } from '../../database/db_node_components';
+import { BJJPosition, BJJPositionType, BJJTransition, BJJTransitionType, Players, Sports, SportsToString } from '../../database/db_node_components';
 import ReferencePanel from './ReferencePanel';
 import SequenceSearch from './SequenceSearch';
 import { Path } from '../functions/depthfirst';
@@ -51,6 +51,9 @@ function formatEdgeContent(edge : Edge<BJJTransition>) : JSX.Element {
 
         <p className='content-subtext'>
             <strong>Move Type:</strong> {BJJTransitionType[pos.trans_type] as string}</p>
+
+        <p className='content-subtext'>
+            <strong>Initiated by:</strong> {Players[pos.initiatedBy] as string}</p>
 
         <p className='content-subtext'>
             <strong>Valid in: </strong> {pos.valid_in_sports.map(SportsToString).join(", ")}</p>
