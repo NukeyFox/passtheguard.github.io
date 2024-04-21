@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Reference } from "../../database/db_node_components";
+import { Reference, ResourceType } from "../../database/db_node_components";
 import "./ReferencePanel.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import LiteYouTubeEmbed from 'react-lite-youtube-embed';
 
 interface ExpandableMenuItemProps {
     title: string;
@@ -10,6 +11,27 @@ interface ExpandableMenuItemProps {
     isOpen?: boolean; // Optional prop for initial open state
     onToggle?: () => void; // Optional callback for toggle events
   }
+
+
+function formatReference(reference : Reference, index : number) : JSX.Element {
+          console.log(reference);
+          switch (reference.resource_type) {
+            case ResourceType.YoutubeVideo: {
+              return (
+                <p key={index}>
+                  <div className="youtube-content">
+                <LiteYouTubeEmbed 
+                  id={reference.resource}
+                  title={reference.resource_name || "Youtube reference"}
+                  /></div>
+                  </p>)}
+            case ResourceType.Article: break;
+            case ResourceType.Image: break;
+            case ResourceType.Instructional: break;
+
+          }
+          return (<li key={index}>Resource not found</li>)
+        }
   
   const ExpandableMenuItem: React.FC<ExpandableMenuItemProps> = ({
     title,
@@ -34,11 +56,9 @@ interface ExpandableMenuItemProps {
         </button>
         {isExpanded && (
           <div className="menu-content">
-            <ul>
               {content.map((item, index) => (
-                <li key={index}>{item.resource}</li>
+                formatReference(item, index)
               ))}
-            </ul>
           </div>
         )}
       </div>

@@ -1,10 +1,14 @@
-import {BJJPosition, BJJPositionType, BJJTransition, BJJTransitionType, Sports} from "./db_node_components"
+import {BJJPosition, BJJPositionType, BJJTransition, BJJTransitionType, ResourceType, Reference, Sports} from "./db_node_components"
 import { Node, Edge, MarkerType } from "reactflow"
 import graph from "./db.json"
 import "../app/network/nodestyle.css";
 
 type BJJPositionMap = Map<string, Node<BJJPosition>>;
 export type AdjacencyMap = Map<Node<BJJPosition>, Map<Node<BJJPosition>, Edge<BJJTransition>[]>>;
+
+function formatRef(item : {resource_type : string, resource : string, resource_name : string}) : Reference {
+    return {resource_type : ResourceType[item.resource_type as keyof typeof ResourceType], resource : item.resource, resource_name : item.resource_name}
+}
 
 function getNodes() : BJJPosition[]{
     var i = 0;
@@ -18,7 +22,7 @@ function getNodes() : BJJPosition[]{
                     pos_type : BJJPositionType[entry.attr.pos_type as keyof typeof BJJPositionType],
                     variations : entry.attr.variations,
                     valid_in_sports : entry.attr?.valid_in_sports.map((sport) => Sports[sport as keyof typeof Sports]),
-                    reference : [],
+                    reference : entry.attr.reference.map(formatRef),
                     comments :  entry.attr.comments,
                     type:"BJJPosition"}
                 )
@@ -36,7 +40,7 @@ function getLinks(node_map : BJJPositionMap ) : BJJTransition[]{
         variations : entry.attr.variations,
         aliases : entry.attr.reference,
         valid_in_sports : [],
-        reference : [],
+        reference : entry.attr.reference,
         diagram : null,
         comments : null,
         parallel_edges : entry.attr.parallel_edges,

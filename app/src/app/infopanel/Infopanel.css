@@ -21,6 +21,13 @@
     overflow-y: auto;
   }
 
+  .youtube-content {
+    min-height : 95vh;
+    max-height: 95vh;
+    color: black; /* Applies to all text elements within the panel content */
+    overflow-y: auto;
+  }
+
   .search-box { 
     border: none;
     font-size: 10px;

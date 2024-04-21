@@ -15,7 +15,13 @@
           "Judo"
         ],
         "variations": [],
-        "reference": [],
+        "reference": [
+          {
+            "resource_type": "YoutubeVideo",
+            "resource_name": "ROGER GRACIE Explains the Best Closed Guard in BJJ",
+            "resource": "kPZh0ZZyZj0"
+          }
+        ],
         "diagram": [],
         "comments": "Bottom player has control in this position."
       },

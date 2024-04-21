@@ -45,7 +45,7 @@ class GraphManager(MultiDiGraph):
                     pos_type : str = "",
                     variations : list[str] = [],
                     valid_in_sports : list[str] = [],
-                    reference : list[str] = [],
+                    references : list[dict[str,str]] = [],
                     diagram = [], 
                     comments : str = ""  ):
         self.add_node(name, 
@@ -54,7 +54,7 @@ class GraphManager(MultiDiGraph):
                         "pos_type" : pos_type,
                         "valid_in_sports" : valid_in_sports,
                         "variations" : variations,
-                        "reference" : reference,
+                        "reference" : references,
                         "diagram" : diagram, 
                         "comments" :comments })
         
@@ -107,7 +107,8 @@ if __name__ == "__main__":
                     description="Ground position. Bottom fighter's legs wrapper around the top fighter's waist.",
                     pos_type="Guard",
                     valid_in_sports=["MMA", "BJJ", "Freestyle Wrestling", "Judo"],
-                    comments="Bottom player has control in this position.")
+                    comments="Bottom player has control in this position.",
+                    references=[{"resource_type": "YoutubeVideo", "resource_name" : "ROGER GRACIE Explains the Best Closed Guard in BJJ", "resource" : "kPZh0ZZyZj0"}])
     
     g.add_node_safe("Half Guard", 
                     aliases=["Half Mount", "Turk Ride"],
