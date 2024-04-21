@@ -108,7 +108,10 @@ if __name__ == "__main__":
                     pos_type="Guard",
                     valid_in_sports=["MMA", "BJJ", "Freestyle Wrestling", "Judo"],
                     comments="Bottom player has control in this position.",
-                    references=[{"resource_type": "YoutubeVideo", "resource_name" : "ROGER GRACIE Explains the Best Closed Guard in BJJ", "resource" : "kPZh0ZZyZj0"}])
+                    references=[{"resource_type": "YoutubeVideo", "resource_name" : "ROGER GRACIE Explains the Best Closed Guard in BJJ", "resource" : "kPZh0ZZyZj0"},
+                                {"resource_type": "Image", "resource_name" : "The Closed Guard \"Xande\" Sweep—a BJJ Tutorial - HowTheyPlay", "resource" : "https://images.saymedia-content.com/.image/t_share/MTc0NDA1NjAzODQ0Njk1Njg2/the-closed-guard-xande-sweep-a-bjj-tutorial.jpg"},
+                                {"resource_type": "Article", "resource_name" : "5 Attacks From The BJJ Full Guard", "resource" : "https://evolve-mma.com/blog/5-attacks-from-the-bjj-full-guard/"},
+                                {"resource_type": "Instructional", "resource_name" : "Passing The Guard: BJJ Fundamentals - Go Further Faster By John Danaher", "resource" : "https://bjjfanatics.com/products/passing-the-guard-bjj-fundamentals-go-further-faster-by-john-danaher"}])
     
     g.add_node_safe("Half Guard", 
                     aliases=["Half Mount", "Turk Ride"],

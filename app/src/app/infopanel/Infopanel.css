@@ -3,7 +3,7 @@
     position: relative;
     right: 0; /* Off-screen to the right */
     top: 0px;
-    width: 25vw;
+    width: 30vw;
     background-color: white;
     border: 1px solid lightgray;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
@@ -19,11 +19,29 @@
     max-height: 95vh;
     color: black; /* Applies to all text elements within the panel content */
     overflow-y: auto;
+
+  }
+
+  .menu-content{
+    text-align: left;
   }
 
   .youtube-content {
-    min-height : 95vh;
-    max-height: 95vh;
+    max-width: 30vw;
+    max-height: 80vh;
+    color: black; /* Applies to all text elements within the panel content */
+    overflow-y: auto;
+  }
+
+  .article-content {
+    max-height: 80vh;
+    color: black; /* Applies to all text elements within the panel content */
+    overflow-y: auto;
+  }
+
+  .image-content {
+    max-width: 25vw;
+    max-height: 80vh;
     color: black; /* Applies to all text elements within the panel content */
     overflow-y: auto;
   }
@@ -72,6 +90,9 @@
     text-align: left;
   }
 
+  .expandable-menu-item{
+    text-align: center;
+  }
 
   .close-button {
     background: none; /* Remove default button styles */

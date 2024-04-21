@@ -18,16 +18,34 @@ function formatReference(reference : Reference, index : number) : JSX.Element {
           switch (reference.resource_type) {
             case ResourceType.YoutubeVideo: {
               return (
-                <p key={index}>
-                  <div className="youtube-content">
+                  <li key={index} className="youtube-content">
+                    <span>(Video) {reference.resource_name}</span>
                 <LiteYouTubeEmbed 
                   id={reference.resource}
                   title={reference.resource_name || "Youtube reference"}
-                  /></div>
-                  </p>)}
-            case ResourceType.Article: break;
-            case ResourceType.Image: break;
-            case ResourceType.Instructional: break;
+                  playerClass="youtube-content"
+                  /></li>
+                 )}
+            case ResourceType.Article:{
+                 return (
+                    <li key={index} className="article-content">
+                        <a href={reference.resource} target="_blank" rel="noopener noreferrer">(Article) {reference.resource_name}</a>
+                    </li>
+                 )}
+            case ResourceType.Image: {
+                 return (
+                    <li key = {index} className="image-content">
+                      <span>{reference.resource_name}</span>
+                      <img src= {reference.resource} alt={reference.resource_name || undefined} className="image-content"/>
+                    </li>
+
+                 )}
+            case ResourceType.Instructional:  {
+              return (
+              <li key={index} className="article-content">
+                  <a href={reference.resource} target="_blank" rel="noopener noreferrer">(Instructional) {reference.resource_name}</a>
+              </li>
+           )}
 
           }
           return (<li key={index}>Resource not found</li>)
