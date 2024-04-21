@@ -130,7 +130,7 @@ if __name__ == "__main__":
     g.add_link_safe("knee slide pass", "Half Guard", "Mount", description= "pass your knee over")
     g.add_link_safe("elbow knee escape \n(from mount)", "Mount", "Half Guard", description= "pass your knee over")
     g.add_link_safe("elbow knee escape \n(from half guard)", "Half Guard", "Closed Guard", description= "pass your knee over")
-    g.add_link_safe("kipping escape", "Mount", "Half Guard", description= "hip hip horray")
+    g.add_link_safe("kipping escape", "Mount", "Half Guard", description= "hip hip horray", reference=[{"resource":"zZvC5BVY0ms", "resource_type" : "YoutubeVideo", "resource_name" : "The Kipping Escape From Mount (No-Gi BJJ)" }])
     g.add_link_safe("test escape", "Half Guard", "Closed Guard", description= "test")
     g.add_link_safe("test escape 2", "Closed Guard", "Closed Guard", description= "test 2")
     g.add_link_safe("test escape closed guard", "Closed Guard", "Closed Guard", description= "test 5")

@@ -216,7 +216,13 @@
         "description": "hip hip horray",
         "valid_in_sports": [],
         "trans_type": "",
-        "reference": [],
+        "reference": [
+          {
+            "resource": "zZvC5BVY0ms",
+            "resource_type": "YoutubeVideo",
+            "resource_name": "The Kipping Escape From Mount (No-Gi BJJ)"
+          }
+        ],
         "variations": [],
         "diagram": [],
         "comments": "",

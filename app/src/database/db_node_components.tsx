@@ -9,6 +9,30 @@ export enum Sports {
     Judo = "Judo"
 }
 
+export function SportsToString(sport : Sports) : string{
+    switch(sport){
+        case Sports.MMA: return "MMA";
+        case Sports.BJJ: return  "BJJ";
+        case Sports.MuayThai: return "Muay Thai"; 
+        case Sports.FreestyleWrestling : return"Freestyle Wrestling";
+        case Sports.NoGiBJJ : return"No-gi BJJ";
+        case Sports.Judo : return "Judo"
+    }
+}
+
+export function StringToSport(str : string) : Sports{
+    switch(str){
+        case "MMA" : return Sports.MMA;
+        case "BJJ" : return Sports.BJJ;
+        case "Muay Thai" : return Sports.MuayThai;
+        case "Freestyle Wrestling" : return Sports.FreestyleWrestling;
+        case "No-gi BJJ" : return Sports.NoGiBJJ;
+        case "Judo" : return Sports.Judo; 
+        default:
+            return Sports.MMA;
+    }
+}
+
 export enum ResourceType {
     Image = "Image",
     YoutubeVideo = "YoutubeVideo",

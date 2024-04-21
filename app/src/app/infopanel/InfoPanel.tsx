@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect, useCallback, Dispatch, SetStateAction } from 'react';
 import './Infopanel.css';
-import { BJJPosition, BJJPositionType, BJJTransition, BJJTransitionType } from '../../database/db_node_components';
+import { BJJPosition, BJJPositionType, BJJTransition, BJJTransitionType, Sports, SportsToString } from '../../database/db_node_components';
 import ReferencePanel from './ReferencePanel';
 import SequenceSearch from './SequenceSearch';
 import { Path } from '../functions/depthfirst';
 import SearchBox from './SearchBox';
 import {Node, Edge} from "reactflow"
+
 
 function formatPositionContent(node : Node<BJJPosition>) : JSX.Element {
   const pos = node.data;
@@ -21,10 +22,8 @@ function formatPositionContent(node : Node<BJJPosition>) : JSX.Element {
           <strong>Position type:</strong> {BJJPositionType[pos?.pos_type] as string}</p>
 
       <p className='content-subtext'>
-          { (pos)  
-           ? <><strong>Valid in: </strong> {pos.valid_in_sports.join(", ")}</> 
-           : <>Not valid in any sport</>}
-          {pos?.valid_in_sports}</p>
+          <strong>Valid in: </strong> {pos.valid_in_sports.map(SportsToString).join(", ")}
+      </p>
       
 
       
@@ -39,6 +38,7 @@ function formatPositionContent(node : Node<BJJPosition>) : JSX.Element {
 
 function formatEdgeContent(edge : Edge<BJJTransition>) : JSX.Element {
   const pos = edge.data;
+  
   if (pos !== undefined)
     return (
         <>
@@ -53,10 +53,7 @@ function formatEdgeContent(edge : Edge<BJJTransition>) : JSX.Element {
             <strong>Move Type:</strong> {BJJTransitionType[pos.trans_type] as string}</p>
 
         <p className='content-subtext'>
-            { (pos)  
-            ? <><strong>Valid in: </strong> {pos.valid_in_sports.join(", ")}</> 
-            : <>Not valid in any sport</>}
-            {pos?.valid_in_sports}</p>
+            <strong>Valid in: </strong> {pos.valid_in_sports.map(SportsToString).join(", ")}</p>
         
 
         
