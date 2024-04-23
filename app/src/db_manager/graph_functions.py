@@ -89,7 +89,7 @@ class GraphManager(MultiDiGraph):
                       id = name,
                       key = name,
                       attr= {
-                          "aliases" : aliases,
+                        "aliases" : aliases,
                         "description" : description,
                         "valid_in_sports" : valid_in_sports,
                         "trans_type" : trans_type,
