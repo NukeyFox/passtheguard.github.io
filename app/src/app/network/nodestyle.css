@@ -20,9 +20,9 @@
 
 .selected-node {
   height: 30px;
-  border: 4px solid #6e1717;
-  padding: 5px;
-  border-radius: 5px;
+  border: 3px solid #e64444;
+  padding: 4px;
+  border-radius: 3px;
   background: rgb(248, 234, 234);
   z-index: -1;
   text-align: center;

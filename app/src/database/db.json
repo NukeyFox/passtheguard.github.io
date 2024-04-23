@@ -5,241 +5,36 @@
   "nodes": [
     {
       "attr": {
-        "aliases": [],
-        "description": "Ground position. Bottom fighter's legs wrapper around the top fighter's waist.",
-        "pos_type": "Guard",
-        "valid_in_sports": [
-          "MMA",
-          "BJJ",
-          "Freestyle Wrestling",
-          "Judo"
-        ],
-        "variations": [],
-        "reference": [
-          {
-            "resource_type": "YoutubeVideo",
-            "resource_name": "ROGER GRACIE Explains the Best Closed Guard in BJJ",
-            "resource": "kPZh0ZZyZj0"
-          },
-          {
-            "resource_type": "Image",
-            "resource_name": "The Closed Guard \"Xande\" Sweep\u2014a BJJ Tutorial - HowTheyPlay",
-            "resource": "https://images.saymedia-content.com/.image/t_share/MTc0NDA1NjAzODQ0Njk1Njg2/the-closed-guard-xande-sweep-a-bjj-tutorial.jpg"
-          },
-          {
-            "resource_type": "Article",
-            "resource_name": "5 Attacks From The BJJ Full Guard",
-            "resource": "https://evolve-mma.com/blog/5-attacks-from-the-bjj-full-guard/"
-          },
-          {
-            "resource_type": "Instructional",
-            "resource_name": "Passing The Guard: BJJ Fundamentals - Go Further Faster By John Danaher",
-            "resource": "https://bjjfanatics.com/products/passing-the-guard-bjj-fundamentals-go-further-faster-by-john-danaher"
-          }
-        ],
-        "diagram": [],
-        "comments": "Bottom player has control in this position."
-      },
-      "id": "Closed Guard"
-    },
-    {
-      "attr": {
         "aliases": [
-          "Half Mount",
-          "Turk Ride"
+          "[]"
         ],
-        "description": "Defensive ground position with the bottom fighter's legs looped around a single leg of the top fighter. In BJJ, the bottom fighter wants to sweep, reguard or submit. The top fighter wants to pass the guard.",
-        "pos_type": "Guard",
-        "valid_in_sports": [
-          "MMA",
-          "BJJ",
-          "Freestyle Wrestling",
-          "Judo"
-        ],
-        "variations": [],
-        "reference": [],
-        "diagram": [],
-        "comments": "Half guard is 50/50 position in BJJ. However, in MMA, it favours the top fighter since they can ground-and-pound."
-      },
-      "id": "Half Guard"
-    },
-    {
-      "attr": {
-        "aliases": [],
-        "description": "Ground position. Top flghter sits on the hips on the bottom fighter.",
+        "description": "",
         "pos_type": "Pin",
         "valid_in_sports": [
-          "MMA",
           "BJJ",
-          "Freestyle Wrestling",
-          "Judo"
+          "Wrestling",
+          "No-gi BJJ"
         ],
-        "variations": [],
-        "reference": [],
-        "diagram": [],
-        "comments": "Favours the top fighter"
+        "variations": [
+          "High Mount",
+          "Low Mount"
+        ],
+        "reference": [
+          {
+            "resource": "https://en.wikipedia.org/wiki/Mount_(grappling)",
+            "resource_name": "Mount (grappling)",
+            "resource_type": "Article"
+          },
+          {
+            "resource": "ShEow7GsUbU",
+            "resource_name": "BJJ Mount position deep basics",
+            "resource_type": "YoutubeVideo"
+          }
+        ],
+        "comments": ""
       },
       "id": "Mount"
     }
   ],
-  "links": [
-    {
-      "id": "test escape 2",
-      "attr": {
-        "aliases": [],
-        "description": "test 2",
-        "valid_in_sports": [],
-        "trans_type": "",
-        "reference": [],
-        "variations": [],
-        "initiatedBy": "None",
-        "diagram": [],
-        "comments": "",
-        "parallel_edges": 2,
-        "edge_no": 0
-      },
-      "source": "Closed Guard",
-      "target": "Closed Guard",
-      "key": "test escape 2"
-    },
-    {
-      "id": "test escape closed guard",
-      "attr": {
-        "aliases": [],
-        "description": "test 5",
-        "valid_in_sports": [],
-        "trans_type": "",
-        "reference": [],
-        "variations": [],
-        "initiatedBy": "None",
-        "diagram": [],
-        "comments": "",
-        "parallel_edges": 2,
-        "edge_no": 1
-      },
-      "source": "Closed Guard",
-      "target": "Closed Guard",
-      "key": "test escape closed guard"
-    },
-    {
-      "id": "slipping up",
-      "attr": {
-        "aliases": [],
-        "description": "slip",
-        "valid_in_sports": [],
-        "trans_type": "",
-        "reference": [],
-        "variations": [],
-        "initiatedBy": "None",
-        "diagram": [],
-        "comments": "",
-        "parallel_edges": 3,
-        "edge_no": 2
-      },
-      "source": "Closed Guard",
-      "target": "Half Guard",
-      "key": "slipping up"
-    },
-    {
-      "id": "knee slide pass",
-      "attr": {
-        "aliases": [],
-        "description": "pass your knee over",
-        "valid_in_sports": [],
-        "trans_type": "",
-        "reference": [],
-        "variations": [],
-        "initiatedBy": "None",
-        "diagram": [],
-        "comments": "",
-        "parallel_edges": 3,
-        "edge_no": 0
-      },
-      "source": "Half Guard",
-      "target": "Mount",
-      "key": "knee slide pass"
-    },
-    {
-      "id": "elbow knee escape \n(from half guard)",
-      "attr": {
-        "aliases": [],
-        "description": "pass your knee over",
-        "valid_in_sports": [],
-        "trans_type": "",
-        "reference": [],
-        "variations": [],
-        "initiatedBy": "None",
-        "diagram": [],
-        "comments": "",
-        "parallel_edges": 3,
-        "edge_no": 0
-      },
-      "source": "Half Guard",
-      "target": "Closed Guard",
-      "key": "elbow knee escape \n(from half guard)"
-    },
-    {
-      "id": "test escape",
-      "attr": {
-        "aliases": [],
-        "description": "test",
-        "valid_in_sports": [],
-        "trans_type": "",
-        "reference": [],
-        "variations": [],
-        "initiatedBy": "None",
-        "diagram": [],
-        "comments": "",
-        "parallel_edges": 3,
-        "edge_no": 1
-      },
-      "source": "Half Guard",
-      "target": "Closed Guard",
-      "key": "test escape"
-    },
-    {
-      "id": "elbow knee escape \n(from mount)",
-      "attr": {
-        "aliases": [],
-        "description": "pass your knee over",
-        "valid_in_sports": [],
-        "trans_type": "",
-        "reference": [],
-        "variations": [],
-        "initiatedBy": "None",
-        "diagram": [],
-        "comments": "",
-        "parallel_edges": 3,
-        "edge_no": 1
-      },
-      "source": "Mount",
-      "target": "Half Guard",
-      "key": "elbow knee escape \n(from mount)"
-    },
-    {
-      "id": "kipping escape",
-      "attr": {
-        "aliases": [],
-        "description": "hip hip horray",
-        "valid_in_sports": [],
-        "trans_type": "",
-        "reference": [
-          {
-            "resource": "zZvC5BVY0ms",
-            "resource_type": "YoutubeVideo",
-            "resource_name": "The Kipping Escape From Mount (No-Gi BJJ)"
-          }
-        ],
-        "variations": [],
-        "initiatedBy": "None",
-        "diagram": [],
-        "comments": "",
-        "parallel_edges": 3,
-        "edge_no": 2
-      },
-      "source": "Mount",
-      "target": "Half Guard",
-      "key": "kipping escape"
-    }
-  ]
+  "links": []
 }

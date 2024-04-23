@@ -46,8 +46,6 @@ class GraphManager(MultiDiGraph):
                     variations : list[str] = [],
                     valid_in_sports : list[str] = [],
                     references : list[dict[str,str]] = [],
-
-                    diagram = [], 
                     comments : str = ""  ):
         self.add_node(name, 
                       attr= {"aliases" : aliases,
@@ -55,8 +53,7 @@ class GraphManager(MultiDiGraph):
                         "pos_type" : pos_type,
                         "valid_in_sports" : valid_in_sports,
                         "variations" : variations,
-                        "reference" : references,
-                        "diagram" : diagram, 
+                        "reference" : references, 
                         "comments" :comments })
         
     def update_link_attr(self, 
@@ -78,7 +75,6 @@ class GraphManager(MultiDiGraph):
                     valid_in_sports : list[str] = [],
                     reference : list[str] = [],
                     initiatedBy : str = "None",
-                    diagram = [], 
                     comments : str = ""  ):
         para_edges = self.get_parallel_edges(from_pos,to_pos)
         if self.has_edge(from_pos,to_pos,name):
@@ -96,49 +92,10 @@ class GraphManager(MultiDiGraph):
                         "reference" : reference,
                         "variations" : variations,
                         "initiatedBy" : initiatedBy,
-                        "diagram" : diagram, 
                         "comments" :comments,
                         "parallel_edges" : p+1,
                         "edge_no" : p})
         for from_pos, to_pos, key in para_edges:
             self.update_link_attr(key,from_pos,to_pos,{"parallel_edges" : p+1})
         
-if __name__ == "__main__":
-    g = GraphManager("./app/src/database/db.json")
-    g.add_node_safe("Closed Guard",
-                    aliases=[],
-                    description="Ground position. Bottom fighter's legs wrapper around the top fighter's waist.",
-                    pos_type="Guard",
-                    valid_in_sports=["MMA", "BJJ", "Freestyle Wrestling", "Judo"],
-                    comments="Bottom player has control in this position.",
-                    references=[{"resource_type": "YoutubeVideo", "resource_name" : "ROGER GRACIE Explains the Best Closed Guard in BJJ", "resource" : "kPZh0ZZyZj0"},
-                                {"resource_type": "Image", "resource_name" : "The Closed Guard \"Xande\" Sweep—a BJJ Tutorial - HowTheyPlay", "resource" : "https://images.saymedia-content.com/.image/t_share/MTc0NDA1NjAzODQ0Njk1Njg2/the-closed-guard-xande-sweep-a-bjj-tutorial.jpg"},
-                                {"resource_type": "Article", "resource_name" : "5 Attacks From The BJJ Full Guard", "resource" : "https://evolve-mma.com/blog/5-attacks-from-the-bjj-full-guard/"},
-                                {"resource_type": "Instructional", "resource_name" : "Passing The Guard: BJJ Fundamentals - Go Further Faster By John Danaher", "resource" : "https://bjjfanatics.com/products/passing-the-guard-bjj-fundamentals-go-further-faster-by-john-danaher"}])
-    
-    g.add_node_safe("Half Guard", 
-                    aliases=["Half Mount", "Turk Ride"],
-                    description="Defensive ground position with the bottom fighter's legs looped around a single leg of the top fighter. In BJJ, the bottom fighter wants to sweep, reguard or submit. The top fighter wants to pass the guard.",
-                    pos_type="Guard",
-                    valid_in_sports=["MMA", "BJJ", "Freestyle Wrestling", "Judo"],
-                    comments="Half guard is 50/50 position in BJJ. However, in MMA, it favours the top fighter since they can ground-and-pound.")
-    
-    g.add_node_safe("Mount", 
-                    aliases=[],
-                    description="Ground position. Top flghter sits on the hips on the bottom fighter.",
-                    pos_type="Pin",
-                    valid_in_sports=["MMA", "BJJ", "Freestyle Wrestling", "Judo"],
-                    comments="Favours the top fighter")
-    
-    g.add_link_safe("knee slide pass", "Half Guard", "Mount", description= "pass your knee over")
-    g.add_link_safe("elbow knee escape \n(from mount)", "Mount", "Half Guard", description= "pass your knee over")
-    g.add_link_safe("elbow knee escape \n(from half guard)", "Half Guard", "Closed Guard", description= "pass your knee over")
-    g.add_link_safe("kipping escape", "Mount", "Half Guard", description= "hip hip horray", reference=[{"resource":"zZvC5BVY0ms", "resource_type" : "YoutubeVideo", "resource_name" : "The Kipping Escape From Mount (No-Gi BJJ)" }])
-    g.add_link_safe("test escape", "Half Guard", "Closed Guard", description= "test")
-    g.add_link_safe("test escape 2", "Closed Guard", "Closed Guard", description= "test 2")
-    g.add_link_safe("test escape closed guard", "Closed Guard", "Closed Guard", description= "test 5")
-    g.add_link_safe("slipping up", "Closed Guard", "Half Guard", description= "slip")
-    
-    g.save_graph()
-
-    print(g.get_parallel_edges("Mount", "Half Guard"))
+GRAPH = GraphManager("./app/src/database/db.json")
