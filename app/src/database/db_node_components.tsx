@@ -44,6 +44,7 @@ export enum ResourceType {
 export enum BJJPositionType {
     Stance = "Stance", 
     Guard = "Guard", 
+    Clinch = "Clinch",
     Pin = "Pin", 
     Grip = "Grip",
     Choke = "Choke",
@@ -53,7 +54,9 @@ export enum BJJPositionType {
 export enum BJJTransitionType {
     Takedown,
     Sweep,
-    Reversal
+    Reversal,
+    Escape,
+    Transition
 }
 
 export type Reference = {

@@ -6,14 +6,12 @@
     {
       "attr": {
         "aliases": [
-          "[]"
+          ""
         ],
-        "description": "",
+        "description": "BJJ|Freestyle Wrestling|No-gi BJJ",
         "pos_type": "Pin",
         "valid_in_sports": [
-          "BJJ",
-          "Wrestling",
-          "No-gi BJJ"
+          ""
         ],
         "variations": [
           "High Mount",
@@ -34,7 +32,477 @@
         "comments": ""
       },
       "id": "Mount"
+    },
+    {
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "pos_type": "Pin",
+        "valid_in_sports": [
+          "BJJ",
+          "Freestyle Wrestling",
+          "No-gi BJJ"
+        ],
+        "variations": [
+          ""
+        ],
+        "reference": [],
+        "comments": ""
+      },
+      "id": "Side Control"
+    },
+    {
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "pos_type": "Pin",
+        "valid_in_sports": [
+          "BJJ",
+          "No-gi BJJ"
+        ],
+        "variations": [
+          ""
+        ],
+        "reference": [],
+        "comments": ""
+      },
+      "id": "Back Mount"
+    },
+    {
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "pos_type": "Pin",
+        "valid_in_sports": [
+          "BJJ",
+          "No-gi BJJ"
+        ],
+        "variations": [
+          ""
+        ],
+        "reference": [],
+        "comments": ""
+      },
+      "id": "Knee-on-Belly"
+    },
+    {
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "pos_type": "Pin",
+        "valid_in_sports": [
+          "BJJ",
+          "No-gi BJJ"
+        ],
+        "variations": [
+          ""
+        ],
+        "reference": [],
+        "comments": ""
+      },
+      "id": "North South"
+    },
+    {
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "pos_type": "Guard",
+        "valid_in_sports": [
+          "BJJ",
+          "No-gi BJJ"
+        ],
+        "variations": [
+          ""
+        ],
+        "reference": [],
+        "comments": "Note that in most rule sets you do not score points for sweeps and reversals from turtle."
+      },
+      "id": "Turtle"
+    },
+    {
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "pos_type": "Guard",
+        "valid_in_sports": [
+          "BJJ",
+          "No-gi BJJ"
+        ],
+        "variations": [
+          ""
+        ],
+        "reference": [],
+        "comments": ""
+      },
+      "id": "Open Guard"
+    },
+    {
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "pos_type": "Guard",
+        "valid_in_sports": [
+          "BJJ",
+          "No-gi BJJ"
+        ],
+        "variations": [
+          ""
+        ],
+        "reference": [],
+        "comments": ""
+      },
+      "id": "Closed Guard"
+    },
+    {
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "pos_type": "Guard",
+        "valid_in_sports": [
+          "BJJ",
+          "No-gi BJJ"
+        ],
+        "variations": [
+          ""
+        ],
+        "reference": [],
+        "comments": ""
+      },
+      "id": "Half Guard"
+    },
+    {
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "pos_type": "Guard",
+        "valid_in_sports": [
+          "BJJ",
+          "No-gi BJJ"
+        ],
+        "variations": [
+          ""
+        ],
+        "reference": [],
+        "comments": ""
+      },
+      "id": "X Guard"
+    },
+    {
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "pos_type": "Guard",
+        "valid_in_sports": [
+          "BJJ",
+          "No-gi BJJ"
+        ],
+        "variations": [
+          ""
+        ],
+        "reference": [],
+        "comments": ""
+      },
+      "id": "Single-leg X Guard"
+    },
+    {
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "pos_type": "Guard",
+        "valid_in_sports": [
+          "BJJ",
+          "No-gi BJJ"
+        ],
+        "variations": [
+          ""
+        ],
+        "reference": [],
+        "comments": ""
+      },
+      "id": "K Guard"
+    },
+    {
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "pos_type": "Guard",
+        "valid_in_sports": [
+          "BJJ",
+          "No-gi BJJ"
+        ],
+        "variations": [
+          ""
+        ],
+        "reference": [],
+        "comments": ""
+      },
+      "id": "50/50 Guard"
+    },
+    {
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "pos_type": "Guard",
+        "valid_in_sports": [
+          "BJJ",
+          "No-gi BJJ"
+        ],
+        "variations": [
+          ""
+        ],
+        "reference": [],
+        "comments": ""
+      },
+      "id": "Butterfly Guard"
+    },
+    {
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "pos_type": "Clinch",
+        "valid_in_sports": [
+          "BJJ",
+          "Freestyle Wrestling",
+          "No-gi BJJ"
+        ],
+        "variations": [
+          ""
+        ],
+        "reference": [],
+        "comments": ""
+      },
+      "id": "Double Underhooks"
+    },
+    {
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "pos_type": "Clinch",
+        "valid_in_sports": [
+          "BJJ",
+          "Freestyle Wrestling",
+          "No-gi BJJ"
+        ],
+        "variations": [
+          ""
+        ],
+        "reference": [],
+        "comments": ""
+      },
+      "id": "Rear Body Lock"
+    },
+    {
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "pos_type": "Clinch",
+        "valid_in_sports": [
+          "BJJ",
+          "Freestyle Wrestling",
+          "No-gi BJJ"
+        ],
+        "variations": [
+          ""
+        ],
+        "reference": [],
+        "comments": ""
+      },
+      "id": "Over-Under"
+    },
+    {
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "pos_type": "Clinch",
+        "valid_in_sports": [
+          "BJJ",
+          "Freestyle Wrestling",
+          "No-gi BJJ"
+        ],
+        "variations": [
+          ""
+        ],
+        "reference": [],
+        "comments": ""
+      },
+      "id": "Interlocked Finger Grips"
+    },
+    {
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "pos_type": "Clinch",
+        "valid_in_sports": [
+          "BJJ",
+          "Freestyle Wrestling",
+          "No-gi BJJ"
+        ],
+        "variations": [
+          ""
+        ],
+        "reference": [],
+        "comments": ""
+      },
+      "id": "Collar-and-Elbow"
     }
   ],
-  "links": []
+  "links": [
+    {
+      "id": "Knee Drive",
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "valid_in_sports": [
+          ""
+        ],
+        "trans_type": "Transition",
+        "reference": [],
+        "variations": [
+          ""
+        ],
+        "initiatedBy": "Top",
+        "comments": "",
+        "parallel_edges": 1,
+        "edge_no": 0
+      },
+      "source": "Side Control",
+      "target": "Mount",
+      "key": "Knee Drive"
+    },
+    {
+      "id": "Side Control to North South",
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "valid_in_sports": [
+          ""
+        ],
+        "trans_type": "Transition",
+        "reference": [],
+        "variations": [
+          ""
+        ],
+        "initiatedBy": "Top",
+        "comments": "",
+        "parallel_edges": 1,
+        "edge_no": 0
+      },
+      "source": "Side Control",
+      "target": "North South",
+      "key": "Side Control to North South"
+    },
+    {
+      "id": "Back Take from Side Control",
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "valid_in_sports": [
+          ""
+        ],
+        "trans_type": "Transition",
+        "reference": [],
+        "variations": [
+          ""
+        ],
+        "initiatedBy": "Top",
+        "comments": "",
+        "parallel_edges": 1,
+        "edge_no": 0
+      },
+      "source": "Side Control",
+      "target": "Back Mount",
+      "key": "Back Take from Side Control"
+    },
+    {
+      "id": "Knee-elbow escape from Side Control",
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "valid_in_sports": [
+          ""
+        ],
+        "trans_type": "Escape",
+        "reference": [],
+        "variations": [
+          ""
+        ],
+        "initiatedBy": "Bottom",
+        "comments": "",
+        "parallel_edges": 1,
+        "edge_no": 0
+      },
+      "source": "Side Control",
+      "target": "Closed Guard",
+      "key": "Knee-elbow escape from Side Control"
+    },
+    {
+      "id": "Knee-elbow escape from Half Guard",
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "valid_in_sports": [
+          "BJJ",
+          "No-gi BJJ"
+        ],
+        "trans_type": "Escape",
+        "reference": [],
+        "variations": [
+          ""
+        ],
+        "initiatedBy": "Bottom",
+        "comments": "",
+        "parallel_edges": 1,
+        "edge_no": 0
+      },
+      "source": "Half Guard",
+      "target": "Mount",
+      "key": "Knee-elbow escape from Half Guard"
+    }
+  ]
 }

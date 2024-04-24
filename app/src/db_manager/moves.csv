@@ -1,0 +1,6 @@
+name,from_pos,to_pos,aliases,initiatedBy,pos_type,variations,valid_in_sports,description,reference,comments
+"Knee-elbow escape from Half Guard","Half Guard","Mount","","Bottom","Escape","","BJJ|No-gi BJJ","","",""
+"Knee Drive","Side Control","Mount","","Top","Transition","","","","",""
+"Side Control to North South","Side Control","North South","","Top","Transition","","","","",""
+"Back Take from Side Control","Side Control","Back Mount","","Top","Transition","","","","",""
+"Knee-elbow escape from Side Control","Side Control","Closed Guard","","Bottom","Escape","","","","",""

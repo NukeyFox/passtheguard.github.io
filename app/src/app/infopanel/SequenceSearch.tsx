@@ -58,15 +58,18 @@ function SequenceSearch({pathHighlight} : SequenceSearchProp) {
     const onSearchClick = (()=>{
         var path : Path = [];
         const n = selectedOptions.length;
+        var validPath :boolean = true;
         if (n >= 2){
             for (var i = 0; i < n-1; i++){
                 var source = data.node_map.get(selectedPath[i]);
                 var target = data.node_map.get(selectedPath[i+1]);
                 var r = DepthFirst(source,target,data.adjMap);
                 const p = r.next();
-                path = path.concat(p.value);
+                if (p.value !== undefined) path = path.concat(p.value);
+                else {validPath = false; break;}
             }
-            pathHighlight(path);
+            if (validPath) pathHighlight(path);
+            else {console.log("No valid path found...")}
         }
     }
         

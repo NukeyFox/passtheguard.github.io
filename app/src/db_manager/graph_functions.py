@@ -35,7 +35,6 @@ class GraphManager(MultiDiGraph):
         outgoing = filter(filter_target(target), self.edges(source, data=False, keys=True))
         incoming = filter(filter_target(source), self.edges(target, data=False, keys=True))
         res = list(set(outgoing).union(set(incoming)))
-        print(f"Search from {source} to {target}: {res}")
         return res
 
     def add_node_safe(self, 
@@ -73,7 +72,7 @@ class GraphManager(MultiDiGraph):
                     variations : list[str] = [],
                     aliases : list[str] = [],
                     valid_in_sports : list[str] = [],
-                    reference : list[str] = [],
+                    references : list[str] = [],
                     initiatedBy : str = "None",
                     comments : str = ""  ):
         para_edges = self.get_parallel_edges(from_pos,to_pos)
@@ -89,7 +88,7 @@ class GraphManager(MultiDiGraph):
                         "description" : description,
                         "valid_in_sports" : valid_in_sports,
                         "trans_type" : trans_type,
-                        "reference" : reference,
+                        "reference" : references,
                         "variations" : variations,
                         "initiatedBy" : initiatedBy,
                         "comments" :comments,
