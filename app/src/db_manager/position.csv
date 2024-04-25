@@ -18,3 +18,10 @@ name,aliases,pos_type,variations,valid_in_sports,description,reference,comments
 "Over-Under",,"Clinch","","BJJ|Freestyle Wrestling|No-gi BJJ","","",""
 "Interlocked Finger Grips",,"Clinch","","BJJ|Freestyle Wrestling|No-gi BJJ","","",""
 "Collar-and-Elbow",,"Clinch","","BJJ|Freestyle Wrestling|No-gi BJJ","","",""
+"Kimura",,"Submission","","BJJ|No-gi BJJ","","",""
+"Americana",,"Submission","","BJJ|No-gi BJJ","","",""
+"Armbar",,"Submission","","BJJ|No-gi BJJ","","",
+"Arm Triangle",,"Choke","","BJJ|No-gi BJJ","","",""
+"Mount Triangle",,"Choke","","BJJ|No-gi BJJ","","",""
+"Rear Triangle",,"Choke","","BJJ|No-gi BJJ","","",""
+"Spider-web",,"SubmissionSetup","","BJJ|No-gi BJJ","","",""

@@ -48,7 +48,8 @@ export enum BJJPositionType {
     Pin = "Pin", 
     Grip = "Grip",
     Choke = "Choke",
-    Submission = "Submission"
+    Submission = "Submission",
+    SubmissionSetup = "Submission Setup"
 }
 
 export enum BJJTransitionType {
@@ -56,7 +57,8 @@ export enum BJJTransitionType {
     Sweep,
     Reversal,
     Escape,
-    Transition
+    Transition,
+    Submission
 }
 
 export type Reference = {

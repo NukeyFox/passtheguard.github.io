@@ -380,9 +380,196 @@
         "comments": ""
       },
       "id": "Collar-and-Elbow"
+    },
+    {
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "pos_type": "Submission",
+        "valid_in_sports": [
+          "BJJ",
+          "No-gi BJJ"
+        ],
+        "variations": [
+          ""
+        ],
+        "reference": [],
+        "comments": ""
+      },
+      "id": "Kimura"
+    },
+    {
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "pos_type": "Submission",
+        "valid_in_sports": [
+          "BJJ",
+          "No-gi BJJ"
+        ],
+        "variations": [
+          ""
+        ],
+        "reference": [],
+        "comments": ""
+      },
+      "id": "Americana"
+    },
+    {
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "pos_type": "Submission",
+        "valid_in_sports": [
+          "BJJ",
+          "No-gi BJJ"
+        ],
+        "variations": [
+          ""
+        ],
+        "reference": [],
+        "comments": ""
+      },
+      "id": "Armbar"
+    },
+    {
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "pos_type": "Choke",
+        "valid_in_sports": [
+          "BJJ",
+          "No-gi BJJ"
+        ],
+        "variations": [
+          ""
+        ],
+        "reference": [],
+        "comments": ""
+      },
+      "id": "Arm Triangle"
+    },
+    {
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "pos_type": "Choke",
+        "valid_in_sports": [
+          "BJJ",
+          "No-gi BJJ"
+        ],
+        "variations": [
+          ""
+        ],
+        "reference": [],
+        "comments": ""
+      },
+      "id": "Mount Triangle"
+    },
+    {
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "pos_type": "Choke",
+        "valid_in_sports": [
+          "BJJ",
+          "No-gi BJJ"
+        ],
+        "variations": [
+          ""
+        ],
+        "reference": [],
+        "comments": ""
+      },
+      "id": "Rear Triangle"
+    },
+    {
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "pos_type": "SubmissionSetup",
+        "valid_in_sports": [
+          "BJJ",
+          "No-gi BJJ"
+        ],
+        "variations": [
+          ""
+        ],
+        "reference": [],
+        "comments": ""
+      },
+      "id": "Spider-web"
+    },
+    {
+      "id": " \"Kimura\""
+    },
+    {
+      "id": "Arm Traingle"
     }
   ],
   "links": [
+    {
+      "id": "Bump Sweep",
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "valid_in_sports": [
+          ""
+        ],
+        "trans_type": "Reversal",
+        "reference": [],
+        "variations": [
+          ""
+        ],
+        "initiatedBy": "Bottom",
+        "comments": "",
+        "parallel_edges": 1,
+        "edge_no": 0
+      },
+      "source": "Mount",
+      "target": "Closed Guard",
+      "key": "Bump Sweep"
+    },
+    {
+      "id": "Arm triangle from Mount",
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "valid_in_sports": [
+          ""
+        ],
+        "trans_type": "Submission",
+        "reference": [],
+        "variations": [
+          ""
+        ],
+        "initiatedBy": "Top",
+        "comments": "",
+        "parallel_edges": 1,
+        "edge_no": 0
+      },
+      "source": "Mount",
+      "target": "Arm Traingle",
+      "key": "Arm triangle from Mount"
+    },
     {
       "id": "Knee Drive",
       "attr": {
@@ -480,6 +667,30 @@
       "key": "Knee-elbow escape from Side Control"
     },
     {
+      "id": "Kimura from Side Control",
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "valid_in_sports": [
+          ""
+        ],
+        "trans_type": "Submission",
+        "reference": [],
+        "variations": [
+          ""
+        ],
+        "initiatedBy": "Top",
+        "comments": "",
+        "parallel_edges": 1,
+        "edge_no": 0
+      },
+      "source": "Side Control",
+      "target": "Kimura",
+      "key": "Kimura from Side Control"
+    },
+    {
       "id": "Knee-elbow escape from Half Guard",
       "attr": {
         "aliases": [
@@ -503,6 +714,104 @@
       "source": "Half Guard",
       "target": "Mount",
       "key": "Knee-elbow escape from Half Guard"
+    },
+    {
+      "id": "Kimura from Bottom Half-Guard",
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "valid_in_sports": [
+          "BJJ",
+          "No-gi BJJ"
+        ],
+        "trans_type": "Submission",
+        "reference": [],
+        "variations": [
+          ""
+        ],
+        "initiatedBy": "Bottom",
+        "comments": "",
+        "parallel_edges": 1,
+        "edge_no": 0
+      },
+      "source": "Half Guard",
+      "target": "Kimura",
+      "key": "Kimura from Bottom Half-Guard"
+    },
+    {
+      "id": "Kimura from Top Half-Guard",
+      "attr": {
+        "aliases": [
+          " \"\""
+        ],
+        "description": "",
+        "valid_in_sports": [
+          "BJJ",
+          "No-gi BJJ"
+        ],
+        "trans_type": "Submission",
+        "reference": [],
+        "variations": [
+          ""
+        ],
+        "initiatedBy": " \"Top\"",
+        "comments": "",
+        "parallel_edges": 1,
+        "edge_no": 0
+      },
+      "source": "Half Guard",
+      "target": " \"Kimura\"",
+      "key": "Kimura from Top Half-Guard"
+    },
+    {
+      "id": "Double-Leg Takedown",
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "valid_in_sports": [
+          ""
+        ],
+        "trans_type": "Takedown",
+        "reference": [],
+        "variations": [
+          ""
+        ],
+        "initiatedBy": "Any",
+        "comments": "",
+        "parallel_edges": 2,
+        "edge_no": 0
+      },
+      "source": "Collar-and-Elbow",
+      "target": "Side Control",
+      "key": "Double-Leg Takedown"
+    },
+    {
+      "id": "Single-Leg Takedown",
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "valid_in_sports": [
+          ""
+        ],
+        "trans_type": "Takedown",
+        "reference": [],
+        "variations": [
+          ""
+        ],
+        "initiatedBy": "Any",
+        "comments": "",
+        "parallel_edges": 2,
+        "edge_no": 1
+      },
+      "source": "Collar-and-Elbow",
+      "target": "Side Control",
+      "key": "Single-Leg Takedown"
     }
   ]
 }

@@ -19,11 +19,11 @@ function getNodes() : BJJPosition[]{
                     label : entry.id,
                     aliases : entry.attr?.aliases || [],
                     description : entry.attr?.description || "",
-                    pos_type : BJJPositionType[entry.attr.pos_type as keyof typeof BJJPositionType],
-                    variations : entry.attr.variations,
-                    valid_in_sports : entry.attr?.valid_in_sports.map(StringToSport),
-                    reference : entry.attr.reference.map(formatRef),
-                    comments :  entry.attr.comments,
+                    pos_type : BJJPositionType[entry.attr?.pos_type as keyof typeof BJJPositionType],
+                    variations : entry.attr?.variations || [],
+                    valid_in_sports : entry.attr?.valid_in_sports.map(StringToSport) || [],
+                    reference : entry.attr?.reference.map(formatRef) || [],
+                    comments :  entry.attr?.comments || "",
                     type:"BJJPosition"}
                 )
     );
