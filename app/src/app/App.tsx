@@ -43,7 +43,7 @@ function App() {
         ({ ...n, type : 'custom' })));
     setEdges((prevEdge) =>
       prevEdge.map((e) => 
-        ({ ...e, markerEnd : { type : MarkerType.ArrowClosed, color : "white"}, style : {...e.style,color : undefined,  zIndex : 100, stroke : "white"}})));
+        ({ ...e, markerEnd : { type : MarkerType.ArrowClosed, color : "white"}, style : {...e.style,color : undefined,  zIndex : 100, stroke : "white", opacity:0.7}})));
   },[setEdges, setNodes]));
 
   const highlightNode = (useCallback((node : RFNode<BJJPosition>) => (
@@ -55,7 +55,7 @@ function App() {
   const highlightEdge = (useCallback((edge : Edge<BJJTransition>) => (
     setEdges((prevNodes) =>
       prevNodes.map((e) => 
-        (edge.id === e.id ? { ...e, markerEnd : { type : MarkerType.ArrowClosed, color : "red"} ,style : {...e.style, color : "#ffa6a6", zIndex: 200, stroke : "red"}} : e)))
+        (edge.id === e.id ? { ...e, markerEnd : { type : MarkerType.ArrowClosed, color : "red"} ,style : {...e.style, color : "#ffa6a6", zIndex: 200, stroke : "red", opacity:1}} : e)))
 ),[setEdges]));
 
 const onNodeClick = useCallback((event: React.MouseEvent<Element>, node: RFNode<BJJPosition>) => {
@@ -113,7 +113,7 @@ const onNodeClick = useCallback((event: React.MouseEvent<Element>, node: RFNode<
         forceLink(edges)
           .id((d) => d.index || 0)
           .strength(1)
-          .distance(500)
+          .distance(200)
       );
   
       // The tick function is called every animation frame while the simulation is

@@ -97,4 +97,4 @@ class GraphManager(MultiDiGraph):
         for from_pos, to_pos, key in para_edges:
             self.update_link_attr(key,from_pos,to_pos,{"parallel_edges" : p+1})
         
-GRAPH = GraphManager("./app/src/database/db.json")
+GRAPH = GraphManager("./src/database/db.json")

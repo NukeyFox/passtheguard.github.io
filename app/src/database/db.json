@@ -6,16 +6,21 @@
     {
       "attr": {
         "aliases": [
-          ""
+          "Full Mount",
+          "Mounted Position"
         ],
-        "description": "BJJ|Freestyle Wrestling|No-gi BJJ",
+        "description": "This is one of the five main pins. The mount is a dominant position where the top player sits on the bottom player's torso, facing their head and pinning down the hips with their weight. The top player's hands are free to post on the mat, pin the bottom player's shoulders on the mat, or go for submissions. The bottom player's hands would be crossed over their neck protecting or at their centre pushing at the hips of the top player. A good (full) mount would be stable with the bottom player driving his hips through the bottom player.  ",
         "pos_type": "Pin",
         "valid_in_sports": [
-          ""
+          "BJJ",
+          "Freestyle Wrestling",
+          "No-gi BJJ"
         ],
         "variations": [
           "High Mount",
-          "Low Mount"
+          "Low Mount",
+          "S-Mount",
+          "Technical Mount"
         ],
         "reference": [
           {
@@ -29,7 +34,7 @@
             "resource_type": "YoutubeVideo"
           }
         ],
-        "comments": ""
+        "comments": "Typically scores the highest number of points (together with back mount), though this is dependent on the rule set."
       },
       "id": "Mount"
     },
@@ -38,7 +43,7 @@
         "aliases": [
           ""
         ],
-        "description": "",
+        "description": "This is one of the five main pins. Side control is a dominant position where the top player is perpendicular to and pinning the bottom player chest-to-chest. The top player controls the shoulders with an underhook on the far-side arm and a cross face with the other. Their knees pushes against the bottom player's hips and arm pit. The hips are controlled through bending the spine inwards and applying shoulder pressure. The bottom player escapes by establishing frames.",
         "pos_type": "Pin",
         "valid_in_sports": [
           "BJJ",
@@ -49,7 +54,7 @@
           ""
         ],
         "reference": [],
-        "comments": ""
+        "comments": "Side control typically does not score points. Points are awarded for passing the guard and getting into side control however. "
       },
       "id": "Side Control"
     },
@@ -58,7 +63,7 @@
         "aliases": [
           ""
         ],
-        "description": "",
+        "description": "This is one of the five main pins. The back mount is a dominant position where the top player has control on the bottom player from the back. The hips are controlled via hooks and the shoulders are controlled through the seatbelt grip. The bottom player aims to escape by turning such that their back and elbow touches the ground.",
         "pos_type": "Pin",
         "valid_in_sports": [
           "BJJ",
@@ -68,7 +73,7 @@
           ""
         ],
         "reference": [],
-        "comments": ""
+        "comments": "The 'top' player in this context is the dominant one with the seatbelt. This is often regarded as the strongest pin and often scoring the most points in some rulesets."
       },
       "id": "Back Mount"
     },
@@ -77,17 +82,20 @@
         "aliases": [
           ""
         ],
-        "description": "",
+        "description": "This is one of the five main pins. Knee-on-belly has the top player place his knee on top of the bottom person's stomach, pinning them down. Their other leg is extended allowing for pressure to be applied. Further control can be gained through getting an underhook and a collar tie/neck pressure. The bottom player aim is to frame and turn towards the top player, however this is risky as it opens the door for the top player for submissions (e.g. arm bar, darse)",
         "pos_type": "Pin",
         "valid_in_sports": [
           "BJJ",
           "No-gi BJJ"
         ],
         "variations": [
-          ""
+          "Knee-on-Stomach",
+          "Knee-on-Chest",
+          "Knee Ride",
+          "Knee mount"
         ],
         "reference": [],
-        "comments": ""
+        "comments": "Despite similarities to side control, knee-on-belly scores points."
       },
       "id": "Knee-on-Belly"
     },
@@ -96,7 +104,7 @@
         "aliases": [
           ""
         ],
-        "description": "",
+        "description": "This is one of the five main pins. North South has the top player lay chest-to-torso on the bottom player, such that they are facing their feet. The top player's hips control the bottom person's shoulders, and the bottom person's hips are controlled by the arms of the top player. The bottom player aims to frame to make space and regain guard (e.g. closed guard, turtle, etc.) or return to side control.",
         "pos_type": "Pin",
         "valid_in_sports": [
           "BJJ",
@@ -515,9 +523,6 @@
       "id": "Spider-web"
     },
     {
-      "id": " \"Kimura\""
-    },
-    {
       "id": "Arm Traingle"
     }
   ],
@@ -643,30 +648,6 @@
       "key": "Back Take from Side Control"
     },
     {
-      "id": "Knee-elbow escape from Side Control",
-      "attr": {
-        "aliases": [
-          ""
-        ],
-        "description": "",
-        "valid_in_sports": [
-          ""
-        ],
-        "trans_type": "Escape",
-        "reference": [],
-        "variations": [
-          ""
-        ],
-        "initiatedBy": "Bottom",
-        "comments": "",
-        "parallel_edges": 1,
-        "edge_no": 0
-      },
-      "source": "Side Control",
-      "target": "Closed Guard",
-      "key": "Knee-elbow escape from Side Control"
-    },
-    {
       "id": "Kimura from Side Control",
       "attr": {
         "aliases": [
@@ -689,6 +670,30 @@
       "source": "Side Control",
       "target": "Kimura",
       "key": "Kimura from Side Control"
+    },
+    {
+      "id": "Knee-elbow escape from Side Control",
+      "attr": {
+        "aliases": [
+          ""
+        ],
+        "description": "",
+        "valid_in_sports": [
+          ""
+        ],
+        "trans_type": "Escape",
+        "reference": [],
+        "variations": [
+          ""
+        ],
+        "initiatedBy": "Bottom",
+        "comments": "",
+        "parallel_edges": 1,
+        "edge_no": 0
+      },
+      "source": "Side Control",
+      "target": "Closed Guard",
+      "key": "Knee-elbow escape from Side Control"
     },
     {
       "id": "Knee-elbow escape from Half Guard",
@@ -733,7 +738,7 @@
         ],
         "initiatedBy": "Bottom",
         "comments": "",
-        "parallel_edges": 1,
+        "parallel_edges": 2,
         "edge_no": 0
       },
       "source": "Half Guard",
@@ -744,7 +749,7 @@
       "id": "Kimura from Top Half-Guard",
       "attr": {
         "aliases": [
-          " \"\""
+          ""
         ],
         "description": "",
         "valid_in_sports": [
@@ -756,13 +761,13 @@
         "variations": [
           ""
         ],
-        "initiatedBy": " \"Top\"",
+        "initiatedBy": "Top",
         "comments": "",
-        "parallel_edges": 1,
-        "edge_no": 0
+        "parallel_edges": 2,
+        "edge_no": 1
       },
       "source": "Half Guard",
-      "target": " \"Kimura\"",
+      "target": "Kimura",
       "key": "Kimura from Top Half-Guard"
     },
     {

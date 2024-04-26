@@ -3,8 +3,8 @@ import csv
 import os
 import re
 
-pos_db : str = "app/src/db_manager/position.csv"
-move_db : str = "app/src/db_manager/moves.csv"
+pos_db : str = "./src/db_manager/position.csv"
+move_db : str = "./src/db_manager/moves.csv"
 
     
 def str_to_list(string : str):

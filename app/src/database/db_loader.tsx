@@ -10,6 +10,26 @@ function formatRef(item : {resource_type : string, resource : string, resource_n
     return {resource_type : ResourceType[item.resource_type as keyof typeof ResourceType], resource : item.resource, resource_name : item.resource_name}
 }
 
+function posByType(pos_type : BJJPositionType) : {x : number, y : number}{
+    const y_dist = 150;
+    switch(pos_type){
+        case BJJPositionType.Stance:
+            return {x : Math.random()*80+50, y : Math.random()*800+y_dist*(-2)}
+        case BJJPositionType.Pin:
+            return {x : Math.random()*80+50, y : Math.random()*800+y_dist*(-1)}
+        case BJJPositionType.Clinch:
+            return {x : Math.random()*80+50, y : Math.random()*800}
+
+        case BJJPositionType.Guard:
+             return {x : Math.random()*80+50, y : Math.random()*800+y_dist*2}
+        case BJJPositionType.Submission:
+            return {x : Math.random()*80+50, y : Math.random()*800+y_dist*3}
+        case BJJPositionType.Choke:
+            return {x : Math.random()*80+50, y : Math.random()*800+y_dist*4}
+    }
+    return {x : Math.random()*1000+50, y : Math.random()*1000+400}
+}
+
 function getNodes() : BJJPosition[]{
     var i = 0;
     const nodes = (graph.nodes).map((entry) => 
@@ -58,7 +78,7 @@ function createInitialNode(node_map : BJJPosition[]) : [BJJPositionMap, Node<BJJ
     node_map.forEach((value, index, arr) => {
         const node =  {
             id : value.id_no.toString(),
-            position : {x : Math.random()*1000+50, y : Math.random()*1000+50},
+            position : posByType(value.pos_type),
             data : value,
             connectable: false,
             type : "custom"

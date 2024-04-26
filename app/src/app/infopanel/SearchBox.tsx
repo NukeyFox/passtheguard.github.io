@@ -29,6 +29,7 @@ export default function SearchBox({selectionCallback} : SearchBoxProp) {
         const names = data.node_map.get(node)?.data.aliases;
         if (names !== undefined){
             for (var nalias of names){
+                if (nalias != "")
                 aliases.push({value : node, label : nalias, type : "BJJPosition"});
             }
         }
@@ -40,6 +41,7 @@ export default function SearchBox({selectionCallback} : SearchBoxProp) {
             if (name !== null){
                 aliases.push({value : name, label : name, type : "BJJTransition"});
                 for (var ealias of edge.data?.aliases){
+                    if (ealias != "")
                     aliases.push({value : name, label : ealias, type : "BJJTransition"})
                 }
             }

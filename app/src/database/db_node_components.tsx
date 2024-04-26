@@ -49,7 +49,7 @@ export enum BJJPositionType {
     Grip = "Grip",
     Choke = "Choke",
     Submission = "Submission",
-    SubmissionSetup = "Submission Setup"
+    SubmissionSetup = "SubmissionSetup"
 }
 
 export enum BJJTransitionType {

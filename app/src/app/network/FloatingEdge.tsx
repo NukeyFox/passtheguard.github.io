@@ -65,7 +65,9 @@ export default function CustomEdge({
             padding: 5,
             borderRadius: 2,
             fontWeight: 500,
+            maxWidth:100,
             color : "#000000",
+            opacity:style?.opacity,
             zIndex : style?.zIndex
           }}
           className="nopan"
